@@ -14,7 +14,7 @@ _**System składa się z:**_
 * Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do bazy i indeksował je.
 * Baza, (nie)relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
 
-![](https://github.com/agh-ki-io/Forganizer/blob/annam/Docs/Koncepcyjna/architektura_systemu.png)
+![](https://github.com/agh-ki-io/Forganizer/blob/master/Docs/Koncepcyjna/architektura_systemu.png)
 
 _Rys. 1. Schemat architektury systemu._
 
