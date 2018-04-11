@@ -15,22 +15,27 @@ _**System składa się z:**_
 * Baza, (nie)relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
 
 ![](https://github.com/agh-ki-io/Forganizer/blob/annam/Docs/Koncepcyjna/architektura_systemu.png)
+
 _Rys. 1. Schemat architektury systemu._
 
 
 ### 3. Moduły:
 
-**a) po stronie interfejsu użytkownika: **
+**a) po stronie interfejsu użytkownika:**
 * Moduł UI
-**b) po stronie modułu wyszukiwania: **
+
+**b) po stronie modułu wyszukiwania:**
 * Moduł wyszukiwania po nazwie
 * Moduł wyszukiwania po tagu
-* Moduł wyszukiwania po komentarzu: **
+* Moduł wyszukiwania po komentarzu
+
 **c) dodawanie komentarzy:**
 * Moduł dodawania komentarzy do pliku
+
 **d)dodawanie pliku**
 * Moduł dodawania pliku
 * Moduł indeksowania pliku
+
 **e) baza z nazwą pliku i ścieżką do niego**
 
 
