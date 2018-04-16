@@ -32,19 +32,19 @@ Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytko
 ***
 
 ### Przypadek użycia: Wyszukiwanie po komentarzu
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce wyszukać plik pamiętając komentarz lub jego część, jaką dodał do tego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce wyszukać plik pamiętając komentarz lub jego część, jaką dodał do tego pliku.  
 Warunek początkowy: Użytkownik wybiera opcję wyszukiwania po komentarzu.
 
 #### Scenariusz podstawowy:
-1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące komentarzem lub jego częścią dla plików, które je zawierają
+1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące komentarzem lub jego częścią dla plików, które je zawierają.
 2. System wyszuka, posegreguje według trafności i wyświetli użytkownikowi pliki na podstawie wprowadzonych informacji.
 
 ***
 
 ### Przypadek użycia: Dodawanie tagu do pliku
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce dodać tag do konkretnego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce dodać tag do konkretnego pliku.  
 Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytkownika celem pogrupowania ich w zbiory o kryteriach zadanych przez użytkownika, służące łatwiejszemu ich wyszukiwaniu.
 
 #### Scenariusz podstawowy:
@@ -65,8 +65,8 @@ Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytko
 
 ***
 ### Przypadek użycia: Wyszukiwanie plików po tagu
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce wyszukać pliki otagowane konkretną etykietą.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce wyszukać pliki otagowane konkretną etykietą.  
 Warunek początkowy: Użytkownik wybiera opcję wyszukiwania po tagu.
 
 #### Scenariusz podstawowy:
@@ -81,14 +81,16 @@ Streszczenie: Użytkownik chce dodać plik do systemu, celem zaindeksowania go.
 Warunek początkowy: Plik nie jest jeszcze w systemie i użytkownik wybrał opcję dodania go.
 
 #### Scenariusz podstawowy:
-1. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
-2. System sprawdza, czy ma już ten plik zindeksowany w systemie.
-3. System dodaje plik do systemu, informując o tym użytkownika.
+1. Użytkownik klika przycisk "dodaj plik".
+2. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
+3. System sprawdza, czy ma już ten plik zindeksowany w systemie.
+4. System dodaje plik do systemu, informując o tym użytkownika.
 
 #### Scenariusz alternatywny:
-1. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
-2. System sprawdza, czy ma już ten plik zindeksowany w systemie.
-3. System nie dodaje plik do systemu, informując użytkownika o tym, że ma już zindeksowany taki plik.
+1. Użytkownik klika przycisk "dodaj plik".
+2. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
+3. System sprawdza, czy ma już ten plik zindeksowany w systemie.
+4. System nie dodaje plik do systemu, informując użytkownika o tym, że ma już zindeksowany taki plik.
 
 ***
 
