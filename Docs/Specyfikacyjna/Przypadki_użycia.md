@@ -1,9 +1,9 @@
 ## Przypadki użycia
 
 ### Przypadek użycia: Wyszukiwanie pliku po nazwie
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik wpisuje w pasek wyszukiwania nazwę, lub jej część, i pojawiają mu się pliki po nazwie.
-Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku lub tylko jego część
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik wpisuje w pasek wyszukiwania nazwę, lub jej część, i pojawiają mu się pliki po nazwie.  
+Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku lub tylko jego część.
 
 #### Scenariusz podstawowy:
 1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące nazwą pliku lub jego częścią.
@@ -13,18 +13,18 @@ Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku l
 ***
 
 ### Przypadek użycia: Dodawanie komentarzy
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce dodać komentarz do konkretnego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce dodać komentarz do konkretnego pliku.  
 Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytkownika celem późniejszego łatwego wyszukiwania.
 
 #### Scenariusz podstawowy:
-1. Użytkownik klika dla pliku w przycisk “dodaj komentarz”.
+1. Użytkownik wybiera plik i klika przycisk “dodaj komentarz”.
 2. System wyświetla użytkownikowi pole do wpisania tekstu (komentarza).
 3. Użytkownik wprowadza komentarz zatwierdzając go odpowiednim przyciskiem.
 4. System zapisuje komentarz dla danego pliku.
 
 #### Scenariusz alternatywny:
-1. Użytkownik klika dla pliku w przycisk “dodaj komentarz”.
+1. Użytkownik wybiera plik i klika przycisk “dodaj komentarz”.
 2. System wyświetla użytkownikowi pole do wpisania tekstu (komentarza).
 3. Użytkownik odrzuca wprowadzony przez siebie komentarz odpowiednim przyciskiem.
 4. System nie zapisuje komentarza, anuluje tę operację.
