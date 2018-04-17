@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -24,9 +26,48 @@
                      <font>
                         <Font name="Century Gothic" size="11.0" />
                      </font></Label>
+                  <Separator layoutY="50.0" opacity="0.44" prefHeight="28.0" prefWidth="200.0" />
                </children>
             </AnchorPane>
-            <Label layoutX="41.0" layoutY="249.0" text="Label" />
+            <JFXButton layoutY="138.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" text="Navigation          " textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic Bold" size="21.0" />
+               </font></JFXButton>
+            <JFXButton layoutY="179.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="175.0" text="Actions          " textFill="#ddcccc">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutY="223.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="144.0" text="  All Files" textFill="#a8a5a5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="260.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="143.0" text=" Groups" textFill="#a8a5a5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="1.0" layoutY="297.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="143.0" text="Tags   " textFill="#a8a5a5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutY="334.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="175.0" text="Info               " textFill="#ddcccc">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutY="378.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="145.0" text=" About  " textFill="#a8a5a5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutY="415.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="145.0" text=" Team   " textFill="#a8a5a5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
          </children></AnchorPane>
    </left>
 </BorderPane>
