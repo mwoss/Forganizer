@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class MainWindowView {
     private final String TITLE = "Forganizer";
-    private final String FXML_FILE_NAME = "mainWindowView.fxml";
+    private final String FXML_FILE_NAME = "/view/mainWindow.fxml";
 
     private Stage primaryStage;
 
@@ -18,8 +18,9 @@ public class MainWindowView {
         this.primaryStage = primaryStage;
     }
 
-    public void showStage(){
+    public void showStage() throws IOException {
         primaryStage.show();
+        setupStage();
     }
 
     private void setupStage() throws IOException {
