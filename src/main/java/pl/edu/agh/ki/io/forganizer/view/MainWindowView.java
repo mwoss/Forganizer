@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class MainWindowView {
     private final String TITLE = "Forganizer";
-    private final String FXML_FILE_NAME = "/view/mainWindow.fxml";
+    private final String FXML_FILE_NAME = "/view/fxmls/mainWindow.fxml";
 
     private Stage primaryStage;
 
@@ -24,8 +24,9 @@ public class MainWindowView {
     }
 
     private void setupStage() throws IOException {
-        primaryStage.setTitle(TITLE);
+//        primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(getRoot()));
+        primaryStage.setResizable(false);
     }
 
     private Parent getRoot() throws IOException {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #5A0026;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="25.0" layoutY="14.0" prefHeight="33.0" prefWidth="150.0" text="FORGANIZER" textFill="#f4f3f4">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutY="47.0" prefHeight="78.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="25.0" text="Contact: contact@forg.com" textFill="#f4f3f4">
+                     <font>
+                        <Font name="Century Gothic" size="11.0" />
+                     </font></Label>
+                  <Label layoutX="24.0" layoutY="-2.0" prefHeight="32.0" prefWidth="139.0" text="Version: 1.0" textFill="#f4f3f4">
+                     <font>
+                        <Font name="Century Gothic" size="11.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+   </left>
+</BorderPane>
