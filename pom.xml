@@ -22,4 +22,19 @@
         </plugins>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>7.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>7.3.0</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
