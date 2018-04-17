@@ -1,9 +1,9 @@
 ## Przypadki użycia
 
 ### Przypadek użycia: Wyszukiwanie pliku po nazwie
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik wpisuje w pasek wyszukiwania nazwę, lub jej część, i pojawiają mu się pliki po nazwie.
-Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku lub tylko jego część
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik wpisuje w pasek wyszukiwania nazwę, lub jej część, i pojawiają mu się pliki po nazwie.  
+Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku lub tylko jego część.
 
 #### Scenariusz podstawowy:
 1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące nazwą pliku lub jego częścią.
@@ -13,18 +13,18 @@ Warunek początkowy: Użytkownik chce wyszukać plik pamiętając nazwę pliku l
 ***
 
 ### Przypadek użycia: Dodawanie komentarzy
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce dodać komentarz do konkretnego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce dodać komentarz do konkretnego pliku.  
 Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytkownika celem późniejszego łatwego wyszukiwania.
 
 #### Scenariusz podstawowy:
-1. Użytkownik klika dla pliku w przycisk “dodaj komentarz”.
+1. Użytkownik wybiera plik i klika przycisk “dodaj komentarz”.
 2. System wyświetla użytkownikowi pole do wpisania tekstu (komentarza).
 3. Użytkownik wprowadza komentarz zatwierdzając go odpowiednim przyciskiem.
 4. System zapisuje komentarz dla danego pliku.
 
 #### Scenariusz alternatywny:
-1. Użytkownik klika dla pliku w przycisk “dodaj komentarz”.
+1. Użytkownik wybiera plik i klika przycisk “dodaj komentarz”.
 2. System wyświetla użytkownikowi pole do wpisania tekstu (komentarza).
 3. Użytkownik odrzuca wprowadzony przez siebie komentarz odpowiednim przyciskiem.
 4. System nie zapisuje komentarza, anuluje tę operację.
@@ -32,19 +32,19 @@ Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytko
 ***
 
 ### Przypadek użycia: Wyszukiwanie po komentarzu
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce wyszukać plik pamiętając komentarz lub jego część, jaką dodał do tego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce wyszukać plik pamiętając komentarz lub jego część, jaką dodał do tego pliku.  
 Warunek początkowy: Użytkownik wybiera opcję wyszukiwania po komentarzu.
 
 #### Scenariusz podstawowy:
-1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące komentarzem lub jego częścią dla plików, które je zawierają
+1. Użytkownik wpisuje w pole wyszukiwania dostępne dla systemu słowo będące komentarzem lub jego częścią dla plików, które je zawierają.
 2. System wyszuka, posegreguje według trafności i wyświetli użytkownikowi pliki na podstawie wprowadzonych informacji.
 
 ***
 
 ### Przypadek użycia: Dodawanie tagu do pliku
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce dodać tag do konkretnego pliku.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce dodać tag do konkretnego pliku.  
 Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytkownika celem pogrupowania ich w zbiory o kryteriach zadanych przez użytkownika, służące łatwiejszemu ich wyszukiwaniu.
 
 #### Scenariusz podstawowy:
@@ -65,8 +65,8 @@ Warunek początkowy: Chęć dodania dodatkowej informacji do pliku przez użytko
 
 ***
 ### Przypadek użycia: Wyszukiwanie plików po tagu
-Aktor główny: Użytkownik
-Streszczenie: Użytkownik chce wyszukać pliki otagowane konkretną etykietą.
+Aktor główny: Użytkownik  
+Streszczenie: Użytkownik chce wyszukać pliki otagowane konkretną etykietą.  
 Warunek początkowy: Użytkownik wybiera opcję wyszukiwania po tagu.
 
 #### Scenariusz podstawowy:
@@ -81,14 +81,16 @@ Streszczenie: Użytkownik chce dodać plik do systemu, celem zaindeksowania go.
 Warunek początkowy: Plik nie jest jeszcze w systemie i użytkownik wybrał opcję dodania go.
 
 #### Scenariusz podstawowy:
-1. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
-2. System sprawdza, czy ma już ten plik zindeksowany w systemie.
-3. System dodaje plik do systemu, informując o tym użytkownika.
+1. Użytkownik klika przycisk "dodaj plik".
+2. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
+3. System sprawdza, czy ma już ten plik zindeksowany w systemie.
+4. System dodaje plik do systemu, informując o tym użytkownika.
 
 #### Scenariusz alternatywny:
-1. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
-2. System sprawdza, czy ma już ten plik zindeksowany w systemie.
-3. System nie dodaje plik do systemu, informując użytkownika o tym, że ma już zindeksowany taki plik.
+1. Użytkownik klika przycisk "dodaj plik".
+2. Użytkownik wybiera plik spośród listy plików, nie będących w systemie, lub podając jego lokalizację.
+3. System sprawdza, czy ma już ten plik zindeksowany w systemie.
+4. System nie dodaje plik do systemu, informując użytkownika o tym, że ma już zindeksowany taki plik.
 
 ***
 
