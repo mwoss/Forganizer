@@ -98,11 +98,6 @@
             <artifactId>antlr</artifactId>
             <version>3.5.2</version>
         </dependency>
-        
-    </dependencies>
-
-
-    <dependencies>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -121,9 +116,7 @@
             <artifactId>jfoenix</artifactId>
             <version>8.0.3</version>
         </dependency>
-
     </dependencies>
-
 
 
 </project>
