@@ -12,7 +12,7 @@ _**System składa się z:**_
 * Modułu wyszukiwania który będzie wyszukiwał indeksowane pliki według zapytania  i kryterium od modułu UI.
 * Moduł komentowania  który będzie dodawał do plików komentarz, otrzymany przez moduł UI.
 * Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do bazy i indeksował je.
-* Baza, (nie)relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
+* Baza, relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
 
 ![](https://github.com/agh-ki-io/Forganizer/blob/master/Docs/Koncepcyjna/architektura_systemu.png)
 
