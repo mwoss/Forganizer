@@ -6,4 +6,7 @@
 |**28 III 2018** | Rozpatrzono przypadki użycia.|
 | **7 IV 2018** | Opracowano koncepcję systemu. Stworzono harmonogram prac |
 | **9 IV 2018** | Stworzenie dokumentu procesowego.|
-| **16 IV 2018** | Wnoszenie zmian do dokumentacji specyfikacyjnej i procesowej |
+| **10 IV 2018** | Wnoszenie zmian do dokumentacji specyfikacyjnej i procesowej |
+| **15 IV 2018** |Implementacja prototypu modułu indeksowania oraz postawienie bazy danych dla plików |
+| **16 IV 2018** | Stworzenie mocku GUI dla prototypu|
+
