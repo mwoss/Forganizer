@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
+
+<AnchorPane prefHeight="521.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane prefHeight="52.0" prefWidth="705.0" style="-fx-background-color: #330015;">
             <children>
@@ -17,6 +18,26 @@
                 </Label>
             </children>
         </AnchorPane>
+      <AnchorPane layoutX="32.0" layoutY="83.0" prefHeight="416.0" prefWidth="643.0">
+         <children>
+            <JFXTreeTableView layoutX="19.0" layoutY="92.0" prefHeight="307.0" prefWidth="608.0" />
+            <JFXTextField alignment="CENTER" layoutX="354.0" layoutY="58.0" prefHeight="25.0" prefWidth="273.0" promptText="Search by tag">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXRadioButton layoutX="78.0" layoutY="63.0" mnemonicParsing="false" text="Action1">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXRadioButton>
+            <JFXRadioButton layoutX="223.0" layoutY="63.0" mnemonicParsing="false" text="Action2">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXRadioButton>
+         </children>
+      </AnchorPane>
     </children>
 
 </AnchorPane>
