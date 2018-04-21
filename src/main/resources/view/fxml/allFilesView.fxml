@@ -23,12 +23,72 @@
                     </Label>
                 </children>
             </AnchorPane>
+          <VBox layoutX="39.0" layoutY="134.0" prefHeight="353.0" prefWidth="265.0">
+              <children>
+                  <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:">
+                      <font>
+                          <Font name="Century Gothic Bold" size="20.0" />
+                      </font>
+                  </Label>
+                  <Label text="Name:">
+                      <font>
+                          <Font name="Century Gothic" size="15.0" />
+                      </font>
+                      <opaqueInsets>
+                          <Insets />
+                      </opaqueInsets>
+                  </Label>
+                  <Label text="Size:">
+                      <font>
+                          <Font name="Century Gothic" size="15.0" />
+                      </font>
+               </Label>
+                  <Label text="File Type:">
+                      <font>
+                          <Font name="Century Gothic" size="15.0" />
+                      </font>
+               </Label>
+                  <Label text="Tags:">
+                      <font>
+                          <Font name="Century Gothic" size="15.0" />
+                      </font>
+               </Label>
+                  <Label text="Comment:">
+                      <font>
+                          <Font name="Century Gothic" size="15.0" />
+                      </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="265.0">
+                      <children>
+                          <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add tag" textAlignment="CENTER" textFill="WHITE">
+                              <HBox.margin>
+                                  <Insets right="20.0" />
+                              </HBox.margin>
+                              <font>
+                                  <Font name="System Bold" size="14.0" />
+                              </font>
+                     </JFXButton>
+                          <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add comment" textAlignment="CENTER" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="14.0" />
+                              </font>
+                     </JFXButton>
+                      </children>
+                      <VBox.margin>
+                          <Insets top="20.0" />
+                      </VBox.margin>
+                  </HBox>
+              </children>
+              <opaqueInsets>
+                  <Insets />
+              </opaqueInsets>
+          </VBox>
         </children>
     </AnchorPane>
     <AnchorPane layoutX="290.0" layoutY="50.0" prefHeight="550.0" prefWidth="415.0">
         <children>
             <JFXTreeTableView layoutX="37.0" layoutY="84.0" prefHeight="443.0" prefWidth="342.0" />
-            <JFXTextField alignment="CENTER" layoutX="208.0" layoutY="42.0" promptText="Search" />
+            <JFXTextField alignment="CENTER" layoutX="244.0" layoutY="43.0" promptText="Search" />
             <Label layoutX="37.0" layoutY="43.0" text="File List TableView">
                 <font>
                     <Font name="Century Gothic Bold" size="20.0" />
@@ -36,59 +96,4 @@
             </Label>
         </children>
     </AnchorPane>
-    <VBox layoutX="14.0" layoutY="132.0" prefHeight="353.0" prefWidth="265.0">
-        <children>
-            <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:">
-                <font>
-                    <Font name="Century Gothic Bold" size="20.0" />
-                </font>
-            </Label>
-            <Label text="Name:">
-                <font>
-                    <Font name="Century Gothic" size="15.0" />
-                </font>
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-            </Label>
-            <Label text="Size:">
-                <font>
-                    <Font name="Century Gothic" size="15.0" />
-                </font></Label>
-            <Label text="File Type:">
-                <font>
-                    <Font name="Century Gothic" size="15.0" />
-                </font></Label>
-            <Label text="Tags:">
-                <font>
-                    <Font name="Century Gothic" size="15.0" />
-                </font></Label>
-            <Label text="Comment:">
-                <font>
-                    <Font name="Century Gothic" size="15.0" />
-                </font>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="265.0">
-                <children>
-                    <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add tag" textAlignment="CENTER" textFill="WHITE">
-                        <HBox.margin>
-                            <Insets right="20.0" />
-                        </HBox.margin>
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font></JFXButton>
-                    <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add comment" textAlignment="CENTER" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font></JFXButton>
-                </children>
-                <VBox.margin>
-                    <Insets top="20.0" />
-                </VBox.margin>
-            </HBox>
-        </children>
-        <opaqueInsets>
-            <Insets />
-        </opaqueInsets>
-    </VBox>
 </AnchorPane>
