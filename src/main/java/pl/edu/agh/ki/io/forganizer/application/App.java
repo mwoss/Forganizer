@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import pl.edu.agh.ki.io.forganizer.view.MainWindowView;
 
-public class Main extends Application{
+public class App extends Application{
     public static void main(String[] args) {
         launch(args);
     }
@@ -13,5 +13,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
         MainWindowView mainWindowView = new MainWindowView(primaryStage);
         mainWindowView.showStage();
+//        TestView testView = new TestView(primaryStage);
+//        testView.showStage();
     }
 }

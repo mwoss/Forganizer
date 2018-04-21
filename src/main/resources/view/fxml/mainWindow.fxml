@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainView" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.Controller" maxHeight="-Infinity"
+<BorderPane fx:id="mainView" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.MainWindowController"
+            maxHeight="-Infinity"
             maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <left>
@@ -53,20 +54,24 @@
                         <Font name="System Bold" size="20.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="allFilesView" alignment="CENTER" layoutY="223.0" mnemonicParsing="false" prefHeight="37.0"
+                <JFXButton fx:id="allFilesView" alignment="CENTER" layoutY="223.0" mnemonicParsing="false"
+                           prefHeight="37.0"
                            prefWidth="144.0" text="  All Files" textFill="#a8a5a5" onAction="#handleChangeView">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="groupView" alignment="CENTER" buttonType="RAISED" layoutY="260.0" mnemonicParsing="false"
-                           prefHeight="37.0" prefWidth="143.0" text=" Groups" textFill="#a8a5a5">
+                <JFXButton fx:id="groupView" alignment="CENTER" buttonType="RAISED" layoutY="260.0"
+                           mnemonicParsing="false"
+                           prefHeight="37.0" prefWidth="143.0" text=" Groups" textFill="#a8a5a5"
+                           onAction="#handleChangeView">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="tagView" alignment="CENTER" layoutX="1.0" layoutY="297.0" mnemonicParsing="false" prefHeight="37.0"
-                           prefWidth="143.0" text="Tags   " textFill="#a8a5a5">
+                <JFXButton fx:id="tagView" alignment="CENTER" layoutX="1.0" layoutY="297.0" mnemonicParsing="false"
+                           prefHeight="37.0"
+                           prefWidth="143.0" text="Tags   " textFill="#a8a5a5" onAction="#handleChangeView">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
@@ -77,14 +82,14 @@
                         <Font name="System Bold" size="20.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton alignment="CENTER" layoutY="378.0" mnemonicParsing="false" prefHeight="37.0"
-                           prefWidth="145.0" text=" About  " textFill="#a8a5a5">
+                <JFXButton fx:id="aboutView" alignment="CENTER" layoutY="378.0" mnemonicParsing="false" prefHeight="37.0"
+                           prefWidth="145.0" text=" About  " textFill="#a8a5a5" onAction="#handleChangeView">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton alignment="CENTER" layoutY="415.0" mnemonicParsing="false" prefHeight="37.0"
-                           prefWidth="145.0" text=" Team   " textFill="#a8a5a5">
+                <JFXButton fx:id="teamView" alignment="CENTER" layoutY="415.0" mnemonicParsing="false" prefHeight="37.0"
+                           prefWidth="145.0" text=" Team   " textFill="#a8a5a5" onAction="#handleChangeView">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
