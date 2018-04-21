@@ -78,18 +78,21 @@
    <center>
       <AnchorPane prefHeight="394.0" prefWidth="349.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField alignment="CENTER" layoutX="536.0" layoutY="95.0" promptText="Search" />
-            <Label layoutX="329.0" layoutY="95.0" text="File List Table View">
-               <font>
-                  <Font name="Century Gothic Bold" size="20.0" />
-               </font>
-            </Label>
-            <JFXTreeTableView layoutX="329.0" layoutY="132.0" prefHeight="443.0" prefWidth="342.0" />
             <AnchorPane prefHeight="52.0" prefWidth="702.0" style="-fx-background-color: #330015;">
                <children>
                   <Label layoutX="22.0" layoutY="10.0" text="ALL FILES" textFill="#bcbcbc">
                      <font>
                         <Font name="Century Gothic Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane layoutX="290.0" layoutY="50.0" prefHeight="550.0" prefWidth="415.0">
+               <children>
+                  <JFXTreeTableView layoutX="37.0" layoutY="84.0" prefHeight="443.0" prefWidth="342.0" />
+                  <JFXTextField alignment="CENTER" layoutX="208.0" layoutY="42.0" promptText="Search" />
+                  <Label layoutX="37.0" layoutY="43.0" text="File List TableView">
+                     <font>
+                        <Font name="Century Gothic Bold" size="20.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
