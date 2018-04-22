@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
@@ -18,8 +22,39 @@
       </AnchorPane>
       <AnchorPane layoutY="51.0" prefHeight="481.0" prefWidth="705.0">
          <children>
-            <JFXTreeTableView layoutX="413.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" />
-            <JFXTreeTableView layoutX="56.0" layoutY="50.0" prefHeight="283.0" prefWidth="238.0" />
+            <JFXTreeTableView layoutX="309.0" layoutY="77.0" prefHeight="390.0" prefWidth="369.0" />
+            <JFXTextField alignment="CENTER" layoutX="309.0" layoutY="39.0" prefHeight="25.0" prefWidth="369.0" promptText="Search by group name">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXTextField>
+            <VBox layoutX="37.0" layoutY="89.0" prefHeight="237.0" prefWidth="221.0" spacing="5">
+               <children>
+                  <Label text="Group info:">
+                     <font>
+                        <Font name="Century Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Name:">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Size:">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="221.0">
+                     <children>
+                        <JFXButton mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add file" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

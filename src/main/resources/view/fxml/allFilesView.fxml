@@ -23,7 +23,7 @@
                     </Label>
                 </children>
             </AnchorPane>
-          <VBox layoutX="39.0" layoutY="134.0" prefHeight="353.0" prefWidth="265.0">
+          <VBox layoutX="39.0" layoutY="134.0" prefHeight="353.0" prefWidth="265.0" spacing="5">
               <children>
                   <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:">
                       <font>
@@ -58,7 +58,7 @@
                           <Font name="Century Gothic" size="15.0" />
                       </font>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="265.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="265.0">
                       <children>
                           <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add tag" textAlignment="CENTER" textFill="WHITE">
                               <HBox.margin>
