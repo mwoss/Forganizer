@@ -22,15 +22,16 @@ public class Searcher {
     public Searcher(String indexPath, String analyzerLanguage) {
         this.indexPath = indexPath;
         if (analyzerLanguage.equals("english")) {
-            analyzer = new StandardAnalyzer();
+            this.analyzer = new StandardAnalyzer();
         } else if (analyzerLanguage.equals("polish")) {
-            analyzer = new MorfologikAnalyzer();
+            this.analyzer = new MorfologikAnalyzer();
         }
     }
 
     public Document[] searchField(String fieldName,
                                   String queryString,
                                   int resultsNum) throws Exception {
+
         IndexReader indexReader = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
         QueryParser queryParser = new QueryParser(fieldName, analyzer);
