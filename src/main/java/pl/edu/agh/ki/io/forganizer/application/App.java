@@ -13,7 +13,5 @@ public class App extends Application{
     public void start(Stage primaryStage) throws Exception {
         MainWindowView mainWindowView = new MainWindowView(primaryStage);
         mainWindowView.showStage();
-//        TestView testView = new TestView(primaryStage);
-//        testView.showStage();
     }
 }
