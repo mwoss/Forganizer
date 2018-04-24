@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 
 public class Indexer {
 
-    private String indexPath = "index";
+    private String indexPath;
     private Analyzer analyzer;
 
     public Indexer(String indexPath, String analyzerLanguage) {
@@ -41,6 +41,5 @@ public class Indexer {
 
         indexWriter.updateDocument(new Term("path", filePath), document);
         indexWriter.close();
-
     }
 }
