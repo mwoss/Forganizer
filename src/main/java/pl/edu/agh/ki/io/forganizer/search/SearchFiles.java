@@ -1,4 +1,4 @@
-package pl.edu.agh.ki.io.forganizer;
+package pl.edu.agh.ki.io.forganizer.search;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
