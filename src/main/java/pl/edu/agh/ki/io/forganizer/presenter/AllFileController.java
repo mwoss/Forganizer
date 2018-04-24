@@ -24,9 +24,8 @@ public class AllFileController {
         //maybe here, maybe in outer util class ¯\_(ツ)_/¯
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose LOGO script");
+        fileChooser.setTitle("Choose file");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT", "*.txt"));
 
         File selectedFile = fileChooser.showOpenDialog(null);
 
