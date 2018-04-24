@@ -17,8 +17,6 @@ public class MainWindowController {
         try {
             String menuItemID = ((JFXButton) event.getSource()).getId();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/" + menuItemID + ".fxml"));
-            loader.setController(this);
-
             mainView.setCenter(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
