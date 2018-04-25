@@ -19,7 +19,7 @@ public class AllFileController {
     JFXButton addFileButton;
 
     //just for prototyping
-    public Pair<String, String> addFileButtonOnAction() throws FileNotFoundException {
+    public String[] addFileButtonOnAction() throws FileNotFoundException {
         //dunno, it should be somehow connected with our model
         //maybe here, maybe in outer util class ¯\_(ツ)_/¯
 
@@ -33,10 +33,10 @@ public class AllFileController {
             String path = selectedFile.getAbsolutePath();
             String fileName = selectedFile.getName();
             System.out.println(String.format("File path: %s, file name: %s", path, fileName));
-            return new Pair<>(path, fileName);
-        }
-        else
+            return new String[]{path, fileName};
+        } else {
             throw new FileNotFoundException("Couldn't find file");
+        }
 
     }
 }
