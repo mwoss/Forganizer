@@ -69,7 +69,7 @@ _Rys. 1. Schemat architektury systemu._
 
 ### 5. Współpraca modułów
 
-Przepływ informacji między modułami odbywa się przy pomocy struktur języka programowania Java
+Przepływ informacji między modułami odbywa się przy pomocy struktur języka programowania Java. Dane o plikach znajdują się w bazie MySQL.
 
 Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby wyszukać plik, oraz kryterium wyszukiwania. Moduł UI jest również odpowiedzialny za wyświetlanie danych i kryterium. Nastepnie jest tworzony obiekt, który jest przesyłany do modułu wyszukiwania, który wysyła zapytanie do bazy o pliki, które spełniają kryterium wyszukiwania. Baza przekazuje listę plików modułowi wyszukiwania, który przekazuje je do Modułu GUI, który je otrzymuje i wyświetla dla użytkownika.
 
