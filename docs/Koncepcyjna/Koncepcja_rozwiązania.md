@@ -14,7 +14,7 @@ _**System składa się z:**_
 * Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do bazy i indeksował je.
 * Baza, relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
 
-![](https://github.com/agh-ki-io/Forganizer/blob/master/Docs/Koncepcyjna/architektura_systemu.png)
+![](https://github.com/agh-ki-io/Forganizer/blob/master/docs/Koncepcyjna/architektura_systemu.png)
 
 _Rys. 1. Schemat architektury systemu._
 
@@ -66,3 +66,17 @@ _Rys. 1. Schemat architektury systemu._
 
 **h) baza z nazwą pliku i ścieżką do niego:**
 * przechowywanie nazwy pliku, ścieżki do niego, jego tagu i id.
+
+### 5. Współpraca modułów
+
+Przepływ informacji między modułami odbywa się przy pomocy struktur języka programowania Java
+
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby wyszukać plik, oraz kryterium wyszukiwania. Moduł UI jest również odpowiedzialny za wyświetlanie danych i kryterium. Nastepnie jest tworzony obiekt, który jest przesyłany do modułu wyszukiwania, który wysyła zapytanie do bazy o pliki, które spełniają kryterium wyszukiwania. Baza przekazuje listę plików modułowi wyszukiwania, który przekazuje je do Modułu GUI, który je otrzymuje i wyświetla dla użytkownika.
+
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby nadać plikowi jakąś własność (komentarz bądź tag) i wprowadza potrzebne do tego informacje. Moduł UI również wyświetla wprowadzone dane. Nastepnie jest tworzony obiekt, który jest dostarczany modułowi komentowania, który wyśle do bazy zmianę w postaci komentarzu/tagu.
+
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o pliku, który chciałby dodać do programu, w raz z potrzebnymi danymi, nastepnie towrzy obiekt, który będzie przekazany modułowi dodawania plików. Modłu UI również wyświetla wprowadzone dane. Moduł dodawania plików dodaje do bazy nowy plik.
+
+Baza otrzymuje zapytania od modułów: komentowania, dodawania plików i wyszukiwania. Dodaje rekordy lub je modyfikuje.
+
+***
