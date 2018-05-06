@@ -2,10 +2,13 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pl.edu.agh.ki.io.forganizer.utils.Pair;
+import pl.edu.agh.ki.io.forganizer.search.Indexer;
+import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,9 +22,17 @@ public class AllFileController {
     JFXButton addFileButton;
 
     //just for prototyping
-    public String[] addFileButtonOnAction() throws FileNotFoundException {
+    public String[] addFileButtonOnAction() throws Exception {
         //dunno, it should be somehow connected with our model
         //maybe here, maybe in outer util class ¯\_(ツ)_/¯
+
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/mainWindow.fxml"));
+//
+//        Pane pane = loader.load();
+//
+//        MainWindowController controller = loader.getController();
+//        Indexer indexer = controller.getIndexer();
+//        Searcher searcher = controller.getSearcher();
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");

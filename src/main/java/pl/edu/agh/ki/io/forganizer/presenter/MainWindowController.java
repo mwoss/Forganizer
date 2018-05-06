@@ -5,10 +5,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
+import pl.edu.agh.ki.io.forganizer.search.Indexer;
+import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
 import java.io.IOException;
 
 public class MainWindowController {
+
+    private Indexer indexer = new Indexer("index", "english");
+    private Searcher searcher = new Searcher("index", "english");
+
+    public MainWindowController() {
+        System.out.println("started controller");
+    }
+
+    public Indexer getIndexer() {
+        return indexer;
+    }
+
+    public Searcher getSearcher() {
+        return searcher;
+    }
+
     @FXML
     private BorderPane mainView;
 
