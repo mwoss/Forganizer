@@ -33,16 +33,16 @@ public class Indexer {
     }
 
     public void addFile(String fileName, String filePath) throws IOException {
-        IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
-        Directory indexDirectory = FSDirectory.open(Paths.get(indexPath));
-        indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-        IndexWriter indexWriter = new IndexWriter(indexDirectory, indexWriterConfig);
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        Directory dir = FSDirectory.open(Paths.get(indexPath));
+        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+        IndexWriter indexWriter = new IndexWriter(dir, config);
 
-        Document document = new Document();
-        document.add(new StringField("path", filePath, Field.Store.YES));
-        document.add(new StringField("name", fileName, Field.Store.YES));
+        Document doc = new Document();
+        doc.add(new StringField("path", filePath, Field.Store.YES));
+        doc.add(new StringField("name", fileName, Field.Store.YES));
 
-        indexWriter.updateDocument(new Term("path", filePath), document);
+        indexWriter.updateDocument(new Term("path", filePath), doc);
         indexWriter.close();
     }
 }
