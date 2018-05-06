@@ -20,12 +20,15 @@ public class Indexer {
     private String indexPath;
     private Analyzer analyzer;
 
-    public Indexer(String indexPath, String analyzerLanguage) {
+    public Indexer(String indexPath, Language analyzerLanguage) {
         this.indexPath = indexPath;
-        if (analyzerLanguage.equals("english")) {
-            analyzer = new StandardAnalyzer();
-        } else if (analyzerLanguage.equals("polish")) {
-            analyzer = new MorfologikAnalyzer();
+        switch (analyzerLanguage) {
+            case ENGLISH:
+                analyzer = new StandardAnalyzer();
+                break;
+            case POLISH:
+                analyzer = new MorfologikAnalyzer();
+                break;
         }
     }
 

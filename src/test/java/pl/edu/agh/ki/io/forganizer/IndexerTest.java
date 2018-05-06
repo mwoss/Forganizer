@@ -8,7 +8,11 @@ public class IndexerTest {
     @Test
     void addFileTest() {
         Indexer indexer = new Indexer("test", "english");
-
+        try {
+            indexer.addFile("file1.txt", "/home/yurii/tmp/file1.txt");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
