@@ -11,6 +11,7 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -23,18 +24,28 @@ public class Indexer {
     public Indexer(String indexPath, Language analyzerLanguage) {
         this.indexPath = indexPath;
         switch (analyzerLanguage) {
-            case ENGLISH:
-                analyzer = new StandardAnalyzer();
-                break;
             case POLISH:
                 analyzer = new MorfologikAnalyzer();
+                break;
+            default:
+                analyzer = new StandardAnalyzer();
                 break;
         }
     }
 
-    public void addFile(String fileName, String filePath) throws IOException {
+    public void addFile(String fileName, String filePath, FolderType folderType) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
-        Directory dir = FSDirectory.open(Paths.get(indexPath));
+
+        Directory dir;
+        switch (folderType) {
+            case FS:
+                dir = FSDirectory.open(Paths.get(indexPath));
+                break;
+            default:
+                dir = new RAMDirectory();
+                break;
+        }
+
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);
 
