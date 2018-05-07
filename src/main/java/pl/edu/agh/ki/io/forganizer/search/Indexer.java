@@ -21,9 +21,9 @@ public class Indexer {
     private String indexPath;
     private Analyzer analyzer;
 
-    public Indexer(String indexPath, Language analyzerLanguage) {
+    public Indexer(String indexPath, Language language) {
         this.indexPath = indexPath;
-        switch (analyzerLanguage) {
+        switch (language) {
             case POLISH:
                 analyzer = new MorfologikAnalyzer();
                 break;
