@@ -26,8 +26,8 @@ public class MainWindowView {
     private void setupStage() throws IOException {
 //        primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(getRoot()));
-        primaryStage.setWidth(800);
-        primaryStage.setHeight(600);
+        primaryStage.setWidth(900);
+        primaryStage.setHeight(700);
     }
 
     private Parent getRoot() throws IOException {

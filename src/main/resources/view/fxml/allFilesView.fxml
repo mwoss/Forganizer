@@ -87,11 +87,9 @@
             </JFXButton>
         </children>
     </AnchorPane>
-      <Label layoutX="343.0" layoutY="93.0" text="File List TableView">
-          <font>
-              <Font name="Century Gothic Bold" size="20.0" />
-          </font>
-      </Label>
-      <JFXTreeTableView layoutX="343.0" layoutY="135.0" prefHeight="401.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-      <JFXTextField alignment="CENTER" layoutX="515.0" layoutY="93.0" promptText="Search" />
+      <JFXTreeTableView layoutX="343.0" layoutY="135.0" prefHeight="401.0" prefWidth="310.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="134.0" />
+      <JFXTextField alignment="CENTER" layoutX="340.0" layoutY="94.0" prefHeight="25.0" prefWidth="283.0" promptText="Search files" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50">
+      <font>
+         <Font size="14.0" />
+      </font></JFXTextField>
 </AnchorPane>
