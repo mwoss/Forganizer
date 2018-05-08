@@ -1,0 +1,40 @@
+.vbox-style{
+    -fx-border-width: 3;
+    -fx-border-color: #dbdbdb;
+    -fx-border-insets: 0;
+    -fx-border-style: dashed;
+    -fx-padding: 5 0 5 5;
+}
+
+.header{
+    -fx-text-fill: #bcbcbc;
+    -fx-background-color: #330015;
+}
+
+.button-action{
+    -fx-background-color: #330015;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: center;
+}
+
+.button-navigation{
+    -fx-text-fill: #a8a5a5;
+    -fx-padding: 0 0 0 65;
+}
+
+.button-navigation-semi{
+    -fx-text-fill: #dddddd;
+    -fx-padding: 0 0 0 40;
+}
+.button-navigation-big{
+    -fx-text-fill: WHITE;
+    -fx-padding: 0 0 0 15;
+}
+
+.label-info{
+    -fx-text-fill: #f4f3f4;
+}
+
+.sidenav{
+    -fx-background-color: #5A0026;
+}
