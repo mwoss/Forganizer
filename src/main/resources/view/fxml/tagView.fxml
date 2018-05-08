@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="521.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane prefHeight="52.0" prefWidth="705.0" style="-fx-background-color: #330015;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="22.0" layoutY="10.0" text="TAGS" textFill="#bcbcbc">
+                <Label layoutX="22.0" layoutY="10.0" text="TAGS" styleClass="header">
                     <font>
                         <Font name="Century Gothic Bold" size="25.0" />
                     </font>

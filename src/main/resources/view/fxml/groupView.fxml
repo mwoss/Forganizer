@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="588.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="588.0" prefWidth="673.0" stylesheets="@../stylesheet/mainStylesheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="52.0" prefWidth="705.0" style="-fx-background-color: #330015;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+      <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header"  AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
          <children>
-            <Label layoutX="22.0" layoutY="10.0" text="GROUPS" textFill="#bcbcbc">
+            <Label layoutX="22.0" layoutY="10.0" text="GROUPS" styleClass="header">
                <font>
                   <Font name="Century Gothic Bold" size="25.0" />
                </font>
@@ -22,7 +22,7 @@
       </AnchorPane>
       <AnchorPane layoutY="51.0" prefHeight="481.0" prefWidth="303.0">
          <children>
-            <VBox layoutX="37.0" layoutY="82.0" prefHeight="136.0" prefWidth="267.0" spacing="5" style="-fx-border-width: 3; -fx-border-color: #dbdbdb; -fx-border-insets: 0; -fx-border-style: dashed; -fx-padding: 5 0 5 5;">
+            <VBox layoutX="37.0" layoutY="82.0" prefHeight="136.0" prefWidth="267.0" spacing="5" styleClass="vbox-style">
                <children>
                   <Label text="Group info:">
                      <font>
@@ -41,7 +41,7 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="221.0">
                      <children>
-                        <JFXButton mnemonicParsing="false" style="-fx-background-color: #330015;" text="Add file" textFill="WHITE">
+                        <JFXButton mnemonicParsing="false" text="Add file" styleClass="button-action">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></JFXButton>
@@ -51,7 +51,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <JFXTreeTableView layoutX="343.0" layoutY="135.0" prefHeight="401.0" prefWidth="310.0"  AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="134.0" />
+      <JFXTreeTableView layoutX="343.0" layoutY="135.0" prefHeight="401.0" prefWidth="310.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="134.0" />
       <JFXTextField alignment="CENTER" layoutX="340.0" layoutY="94.0" prefHeight="25.0" prefWidth="283.0" promptText="Search by group name" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font size="14.0" />
