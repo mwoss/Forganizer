@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane prefHeight="52.0" prefWidth="705.0" style="-fx-background-color: #330015;">
+        <AnchorPane prefHeight="52.0" prefWidth="705.0" style="-fx-background-color: #330015;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label layoutX="22.0" layoutY="10.0" text="ABOUT" textFill="#bcbcbc">
                     <font>
@@ -18,7 +18,7 @@
                 </Label>
             </children>
         </AnchorPane>
-      <VBox alignment="TOP_CENTER" layoutX="213.0" layoutY="52.0" prefHeight="348.0" prefWidth="271.0">
+      <VBox alignment="TOP_CENTER" layoutX="213.0" layoutY="52.0" prefHeight="348.0" prefWidth="271.0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
          <children>
             <Pane prefHeight="33.0" prefWidth="271.0" />
             <Label text="Forganizer">
