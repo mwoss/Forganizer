@@ -11,6 +11,7 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -20,26 +21,39 @@ public class Indexer {
     private String indexPath;
     private Analyzer analyzer;
 
-    public Indexer(String indexPath, String analyzerLanguage) {
+    public Indexer(String indexPath, Language analyzerLanguage) {
         this.indexPath = indexPath;
-        if (analyzerLanguage.equals("english")) {
-            analyzer = new StandardAnalyzer();
-        } else if (analyzerLanguage.equals("polish")) {
-            analyzer = new MorfologikAnalyzer();
+        switch (analyzerLanguage) {
+            case POLISH:
+                analyzer = new MorfologikAnalyzer();
+                break;
+            default:
+                analyzer = new StandardAnalyzer();
+                break;
         }
     }
 
-    public void addFile(String fileName, String filePath) throws IOException {
-        IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
-        Directory indexDirectory = FSDirectory.open(Paths.get(indexPath));
-        indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-        IndexWriter indexWriter = new IndexWriter(indexDirectory, indexWriterConfig);
+    public void addFile(String fileName, String filePath, FolderType folderType) throws IOException {
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
 
-        Document document = new Document();
-        document.add(new StringField("path", filePath, Field.Store.YES));
-        document.add(new StringField("name", fileName, Field.Store.YES));
+        Directory dir;
+        switch (folderType) {
+            case FS:
+                dir = FSDirectory.open(Paths.get(indexPath));
+                break;
+            default:
+                dir = new RAMDirectory();
+                break;
+        }
 
-        indexWriter.updateDocument(new Term("path", filePath), document);
+        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+        IndexWriter indexWriter = new IndexWriter(dir, config);
+
+        Document doc = new Document();
+        doc.add(new StringField("path", filePath, Field.Store.YES));
+        doc.add(new StringField("name", fileName, Field.Store.YES));
+
+        indexWriter.updateDocument(new Term("path", filePath), doc);
         indexWriter.close();
     }
 }
