@@ -19,12 +19,15 @@ public class Searcher {
     private String indexPath;
     private Analyzer analyzer;
 
-    public Searcher(String indexPath, String analyzerLanguage) {
+    public Searcher(String indexPath, Language language) {
         this.indexPath = indexPath;
-        if (analyzerLanguage.equals("english")) {
-            this.analyzer = new StandardAnalyzer();
-        } else if (analyzerLanguage.equals("polish")) {
-            this.analyzer = new MorfologikAnalyzer();
+        switch (language) {
+            case POLISH:
+                analyzer = new MorfologikAnalyzer();
+                break;
+            default:
+                analyzer = new StandardAnalyzer();
+                break;
         }
     }
 

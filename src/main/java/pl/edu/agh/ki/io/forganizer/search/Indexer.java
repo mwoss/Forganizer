@@ -21,9 +21,9 @@ public class Indexer {
     private String indexPath;
     private Analyzer analyzer;
 
-    public Indexer(String indexPath, Language analyzerLanguage) {
+    public Indexer(String indexPath, Language language) {
         this.indexPath = indexPath;
-        switch (analyzerLanguage) {
+        switch (language) {
             case POLISH:
                 analyzer = new MorfologikAnalyzer();
                 break;
@@ -33,9 +33,10 @@ public class Indexer {
         }
     }
 
-    public void addFile(String fileName, String filePath, FolderType folderType) throws IOException {
+    public Directory addFile(String fileName,
+                             String filePath,
+                             FolderType folderType) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
-
         Directory dir;
         switch (folderType) {
             case FS:
@@ -45,15 +46,13 @@ public class Indexer {
                 dir = new RAMDirectory();
                 break;
         }
-
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);
-
         Document doc = new Document();
         doc.add(new StringField("path", filePath, Field.Store.YES));
         doc.add(new StringField("name", fileName, Field.Store.YES));
-
         indexWriter.updateDocument(new Term("path", filePath), doc);
         indexWriter.close();
+        return dir;
     }
 }
