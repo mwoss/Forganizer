@@ -38,7 +38,7 @@ public class Indexer {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);
-        indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
+        indexWriter.addDocument(doc);
         indexWriter.close();
     }
 }

@@ -12,15 +12,17 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.edu.agh.ki.io.forganizer.search.FolderType;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,11 +99,43 @@ class FileManagerTest {
     @Test
     void getAllFiles() {
         //Given
+        File file1 = new File("xDD", "home/countess/Documents/test1")
+                .withComment("lol");
+        File file2 = new File("important-file.txt", "home/countess/Documents/test2/more/important");
+        File file3 = new File("my-picture.png", "home/countess/Documents/pictures")
+                .withTag("picture");
+        File file4 = new File("my-picture2.png", "home/countess/Documents/pictures")
+                .withTag("picture");
+        File file5 = new File("my-picture3.png", "home/countess/Documents/pictures")
+                .withTag("picture");
+        File file6 = new File("script.sh", "home/countess/Documents/dev/scripts")
+                .withTag("scripts")
+                .withComment("to initialize sth");
+        List<File> expectedFiles = Arrays.asList(file1, file2, file3, file4, file5, file6);
+
+
+        try (Directory directory = FSDirectory.open(Paths.get("test"))) {
+            fileManager.addFile(file1, directory);
+            fileManager.addFile(file2, directory);
+            fileManager.addFile(file3, directory);
+            fileManager.addFile(file4, directory);
+            fileManager.addFile(file5, directory);
+            fileManager.addFile(file6, directory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //When
-
-
+        List<File> files = null;
+        try (Directory directory = FSDirectory.open(Paths.get("test"))) {
+            files = fileManager.getAllFiles(directory);
+        } catch (IOException e) {
+            e.printStackTrace();
+            assert false;
+        }
         //Then
+        assertTrue(expectedFiles.containsAll(files));
+        assertTrue(files.containsAll(expectedFiles));
 
     }
 }
