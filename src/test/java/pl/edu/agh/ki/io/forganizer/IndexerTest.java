@@ -1,6 +1,8 @@
 package pl.edu.agh.ki.io.forganizer;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
@@ -8,6 +10,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.junit.jupiter.api.Test;
+import pl.edu.agh.ki.io.forganizer.model.Converter;
 import pl.edu.agh.ki.io.forganizer.search.FolderType;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
@@ -23,8 +26,11 @@ public class IndexerTest {
         Indexer indexer = new Indexer("test", Language.ENGLISH);
         String fileName = "file-with-long-name.txt";
         String filePath = "/home/yurii/tmp/" + fileName;
+        Document document = new Document();
+        document.add(new StringField("name", fileName, Field.Store.YES));
+        document.add(new StringField("path", filePath, Field.Store.YES));
         try {
-            Directory dir = indexer.addFile(fileName, filePath, FolderType.RAM);
+            Directory dir = indexer.addFile(document, FolderType.RAM);
             DirectoryReader dirReader = DirectoryReader.open(dir);
             IndexSearcher searcher = new IndexSearcher(dirReader);
             Query query = new MatchAllDocsQuery();
