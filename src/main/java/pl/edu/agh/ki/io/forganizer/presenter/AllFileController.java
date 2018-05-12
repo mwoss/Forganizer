@@ -5,8 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
@@ -16,10 +15,14 @@ import java.io.FileNotFoundException;
 
 public class AllFileController {
 
-    private static final Logger log = LogManager.getLogger(AllFileController.class);
+    private static final Logger log = Logger.getLogger(AllFileController.class);
 
     @FXML
     JFXButton addFileButton;
+
+    public AllFileController() {
+        log.info("AllFile Controller initialized");
+    }
 
     //just for prototyping
     public String[] addFileButtonOnAction() throws Exception {
