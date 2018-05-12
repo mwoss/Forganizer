@@ -33,8 +33,7 @@ public class Indexer {
         }
     }
 
-    public Directory addFile(String fileName,
-                             String filePath,
+    public Directory addFile(Document doc,
                              FolderType folderType) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         Directory dir;
@@ -48,10 +47,7 @@ public class Indexer {
         }
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);
-        Document doc = new Document();
-        doc.add(new StringField("path", filePath, Field.Store.YES));
-        doc.add(new StringField("name", fileName, Field.Store.YES));
-        indexWriter.updateDocument(new Term("path", filePath), doc);
+        indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
         indexWriter.close();
         return dir;
     }
