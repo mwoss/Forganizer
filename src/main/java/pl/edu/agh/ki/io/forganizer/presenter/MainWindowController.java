@@ -9,14 +9,19 @@ import org.apache.log4j.Logger;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.search.Searcher;
+import pl.edu.agh.ki.io.forganizer.utils.Consts;
 
 import java.io.IOException;
 
 public class MainWindowController {
 
-    private static final Logger log = Logger.getLogger(AllFileController.class);
-    private Indexer indexer = new Indexer("index", Language.ENGLISH);
-    private Searcher searcher = new Searcher("index", Language.ENGLISH);
+    private final Logger log = Logger.getLogger(AllFilesController.class);
+    private Indexer indexer = new Indexer(Consts.pathIndex, Language.ENGLISH);
+    private Searcher searcher = new Searcher(Consts.pathIndex, Language.ENGLISH);
+
+
+    @FXML
+    private BorderPane mainView;
 
     public MainWindowController() {
         log.info("MainWindow Controller initialized");
@@ -31,16 +36,14 @@ public class MainWindowController {
     }
 
     @FXML
-    private BorderPane mainView;
-
-    @FXML
     private void handleChangeView(ActionEvent event) {
         try {
             String menuItemID = ((JFXButton) event.getSource()).getId();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/" + menuItemID + ".fxml"));
+//            loader.setRoot(this);
             mainView.setCenter(loader.load());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

@@ -75,6 +75,6 @@
         </AnchorPane>
     </left>
     <center>
-        <fx:include source="allFilesView.fxml" />
+        <fx:include fx:id="allFiles" source="allFiles.fxml" />
     </center>
 </BorderPane>
