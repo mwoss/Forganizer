@@ -32,23 +32,15 @@ public class Indexer {
                 break;
         }
     }
+    // TODO
+    // dir = FSDirectory.open(Paths.get(indexPath));
+    // dir = new RAMDirectory();
 
-    public Directory addFile(Document doc,
-                             FolderType folderType) throws IOException {
+    public void addFile(Document doc, Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
-        Directory dir;
-        switch (folderType) {
-            case FS:
-                dir = FSDirectory.open(Paths.get(indexPath));
-                break;
-            default:
-                dir = new RAMDirectory();
-                break;
-        }
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);
         indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
         indexWriter.close();
-        return dir;
     }
 }

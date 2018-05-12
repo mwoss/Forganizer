@@ -30,7 +30,7 @@ public class Searcher {
                 break;
         }
     }
-
+    // TODO
     public Document[] searchField(String fieldName,
                                   String queryString,
                                   int resultsNum) throws Exception {

@@ -1,5 +1,6 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
+import org.apache.lucene.store.Directory;
 import pl.edu.agh.ki.io.forganizer.search.FolderType;
 import pl.edu.agh.ki.io.forganizer.search.IndexFiles;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
@@ -18,8 +19,8 @@ public class FileManager {
         converter = new Converter();
     }
 
-    public void addFile(File file, FolderType folderType) throws IOException {
-        indexer.addFile(converter.convertFileToDoc(file), folderType);
+    public void addFile(File file, Directory dir) throws IOException {
+        indexer.addFile(converter.convertFileToDoc(file), dir);
     }
 
     public void updateFile(File file) {
