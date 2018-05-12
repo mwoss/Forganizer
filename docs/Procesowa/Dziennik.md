@@ -10,8 +10,7 @@
 | **15 IV 2018** | Implementacja prototypu modułu indeksowania oraz postawienie bazy danych dla plików |
 | **16 IV 2018** | Stworzenie mocku GUI dla prototypu |
 | **17 IV 2018** | Dodanie startera aplikacji w klasie App |
-| **18 IV 2018** | Stworzenie działającego prototypu idexowania i wyszukiwania plików, 
-dodano przypadki użycia do dokumentacji |
+| **18 IV 2018** | Stworzenie działającego prototypu idexowania i wyszukiwania plików, dodano przypadki użycia w dokumentacji specyfikacyjnej |
 | **22 IV 2018** | Dodanie do widoku buttonów oraz podwidoków |
 | **24 IV 2018** | Istotne zmiany w obsłudze widoku |
 | **3 V 2018** | Zmiana sposobu przechowywania - rezygnacja z bazy danych |
