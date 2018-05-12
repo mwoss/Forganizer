@@ -52,4 +52,26 @@ public class File {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        File file = (File) o;
+
+        if (!name.equals(file.name)) return false;
+        if (!path.equals(file.path)) return false;
+        if (comment != null ? !comment.equals(file.comment) : file.comment != null) return false;
+        return tag != null ? tag.equals(file.tag) : file.tag == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + path.hashCode();
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        return result;
+    }
 }
