@@ -27,6 +27,9 @@ public class Indexer {
                 break;
         }
     }
+    // TODO
+    // dir = FSDirectory.open(Paths.get(indexPath));
+    // dir = new RAMDirectory();
 
     private IndexWriter prepareIndexWriter(Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
@@ -36,8 +39,7 @@ public class Indexer {
 
     public void addDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
-        Term term = new Term("path", doc.get("path"));
-        indexWriter.updateDocument(term, doc);
+        indexWriter.addDocument(doc);
         indexWriter.close();
     }
 
