@@ -1,6 +1,8 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
-public class File {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class File extends RecursiveTreeObject<File> {
     private String name;
     private String path;
     private String comment;
