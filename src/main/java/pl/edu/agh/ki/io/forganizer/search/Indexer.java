@@ -36,8 +36,7 @@ public class Indexer {
 
     public void addDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
-        Term term = new Term("path", doc.get("path"));
-        indexWriter.updateDocument(term, doc);
+        indexWriter.addDocument(doc);
         indexWriter.close();
     }
 

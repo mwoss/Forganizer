@@ -74,4 +74,9 @@ public class File {
         result = 31 * result + (tag != null ? tag.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return this.path + "/" + this.name;
+    }
 }
