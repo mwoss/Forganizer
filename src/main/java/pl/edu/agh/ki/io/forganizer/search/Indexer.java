@@ -8,11 +8,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 public class Indexer {
 
@@ -30,15 +27,31 @@ public class Indexer {
                 break;
         }
     }
-    // TODO
-    // dir = FSDirectory.open(Paths.get(indexPath));
-    // dir = new RAMDirectory();
 
-    public void addFile(Document doc, Directory dir) throws IOException {
+    private IndexWriter prepareIndexWriter(Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-        IndexWriter indexWriter = new IndexWriter(dir, config);
-        indexWriter.addDocument(doc);
+        return new IndexWriter(dir, config);
+    }
+
+    public void addDoc(Document doc, Directory dir) throws IOException {
+        IndexWriter indexWriter = prepareIndexWriter(dir);
+        Term term = new Term("path", doc.get("path"));
+        indexWriter.updateDocument(term, doc);
+        indexWriter.close();
+    }
+
+    public void removeDoc(Document doc, Directory dir) throws IOException {
+        IndexWriter indexWriter = prepareIndexWriter(dir);
+        Term[] terms = {new Term("path", doc.get("path"))};
+        indexWriter.deleteDocuments(terms);
+        indexWriter.close();
+    }
+
+    public void updateDoc(Document doc, Directory dir) throws IOException {
+        IndexWriter indexWriter = prepareIndexWriter(dir);
+        Term term = new Term("path", doc.get("path"));
+        indexWriter.updateDocument(term, doc);
         indexWriter.close();
     }
 }
