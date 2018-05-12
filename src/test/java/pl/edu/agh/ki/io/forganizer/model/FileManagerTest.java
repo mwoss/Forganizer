@@ -19,10 +19,8 @@ import pl.edu.agh.ki.io.forganizer.search.Language;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,7 +48,7 @@ class FileManagerTest {
 
 
     @Test
-    void addFile() throws IOException {
+    void addFileTest() throws IOException {
         //Given
         String fileNameTest1 = "xD.txt";
         String fileNameTest2 = "xDD.txt";
@@ -97,7 +95,7 @@ class FileManagerTest {
     }
 
     @Test
-    void getAllFiles() {
+    void getAllFilesTest() {
         //Given
         File file1 = new File("xDD", "home/countess/Documents/test1")
                 .withComment("lol");
