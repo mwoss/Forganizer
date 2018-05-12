@@ -1,15 +1,17 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.RAMDirectory;
-import org.junit.jupiter.api.BeforeAll;
+import org.apache.lucene.util.Version;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.ki.io.forganizer.search.FolderType;
@@ -26,7 +28,21 @@ class FileManagerTest {
 
     @BeforeEach
     void init() {
+        IndexWriterConfig conf = new IndexWriterConfig(
+                new StandardAnalyzer());
+        conf.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+        try (Directory directory = FSDirectory.open(Paths.get("test"))) {
+
+            IndexWriter indexWriter = new IndexWriter(directory, conf);
+            indexWriter.deleteAll();
+            indexWriter.commit();
+            indexWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         fileManager = new FileManager("test", Language.ENGLISH);
+
     }
 
 
@@ -78,7 +94,12 @@ class FileManagerTest {
 
     @Test
     void getAllFiles() {
-        assert true;
+        //Given
+
+        //When
+
+
+        //Then
 
     }
 }
