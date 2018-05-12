@@ -1,17 +1,14 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
-import org.apache.lucene.document.Document;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileManager {
 
@@ -39,26 +36,9 @@ public class FileManager {
 
     }
 
-    List<File> getAllFiles() {
-        List<File> allFiles = null;
-        try (Directory dir = FSDirectory.open(Paths.get(path));
-            IndexReader reader = DirectoryReader.open(dir)) {
-            int n = reader.maxDoc();
-            IndexSearcher searcher = new IndexSearcher(reader);
-            Query query = new MatchAllDocsQuery();
-            ScoreDoc[] hits = searcher.search(query, n).scoreDocs;
-            allFiles = Arrays.stream(hits).map(e -> {
-                try {
-                    return converter.convertDocToFile(searcher.doc(e.doc));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                    return null;
-                }
-            }).collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return allFiles;
+    List<File> getAllFiles(Directory dir) throws IOException {
+        return Arrays.stream(searcher.getAllDocs(dir))
+                .map(converter::convertDocToFile).collect(Collectors.toList());
     }
 
 
