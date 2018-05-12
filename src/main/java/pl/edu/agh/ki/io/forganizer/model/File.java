@@ -1,58 +1,60 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class File extends RecursiveTreeObject<File> {
-    private String name;
-    private String path;
-    private String comment;
-    private String tag;
+    private StringProperty name;
+    private StringProperty path;
+    private StringProperty comment;
+    private StringProperty tag;
 
     public File(String name, String path) {
-        this.name = name;
-        this.path = path;
+        this.name = new SimpleStringProperty(name);
+        this.path = new SimpleStringProperty(path);
     }
 
     public File withComment(String comment) {
-        this.comment = comment;
+        this.comment = new SimpleStringProperty(comment);
         return this;
     }
 
     public File withTag(String tag) {
-        this.tag = tag;
+        this.tag = new SimpleStringProperty(tag);
         return this;
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getPath() {
-        return path;
+        return path.get();
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.path.set(path);
     }
 
     public String getComment() {
-        return comment;
+        return comment.get();
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment.set(comment);
     }
 
     public String getTag() {
-        return tag;
+        return tag.get();
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        this.tag.set(tag);
     }
 
     @Override

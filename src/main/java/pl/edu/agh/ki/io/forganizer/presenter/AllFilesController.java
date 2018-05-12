@@ -50,13 +50,14 @@ public class AllFilesController implements Initializable {
 
     }
 
-//    private ChangeListener<String> setupSearchField(JFXTreeTableView<File> tableView) {
-//        return (o, oldVal, newVal) ->
-//                tableView.setPredicate(fileProp -> {
-//                    final File file = fileProp.getValue();
-//                    return file.g
-//                });
-//    }
+    private ChangeListener<String> setupSearchField(JFXTreeTableView<File> tableView) {
+        return (o, oldVal, newVal) ->
+                tableView.setPredicate(fileProp -> {
+                    final File file = fileProp.getValue();
+                    return file.getName().contains(newVal)
+                            || file.getPath().contains(newVal);
+                });
+    }
 
     public void addFileButtonOnAction() {
         java.io.File selectedFile = fileChooser.showOpenDialog(null);
