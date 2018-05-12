@@ -34,7 +34,7 @@ public class Indexer {
     // dir = FSDirectory.open(Paths.get(indexPath));
     // dir = new RAMDirectory();
 
-    public void addFile(Document doc, Directory dir) throws IOException {
+    public void addDoc(Document doc, Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         IndexWriter indexWriter = new IndexWriter(dir, config);

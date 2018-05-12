@@ -11,8 +11,6 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.junit.jupiter.api.Test;
-import pl.edu.agh.ki.io.forganizer.model.Converter;
-import pl.edu.agh.ki.io.forganizer.search.FolderType;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 
@@ -32,7 +30,7 @@ public class IndexerTest {
         document.add(new StringField("path", filePath, Field.Store.YES));
         Directory dir = new RAMDirectory();
         try {
-            indexer.addFile(document, dir);
+            indexer.addDoc(document, dir);
             DirectoryReader dirReader = DirectoryReader.open(dir);
             IndexSearcher searcher = new IndexSearcher(dirReader);
             Query query = new MatchAllDocsQuery();

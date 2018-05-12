@@ -25,7 +25,7 @@ public class FileManager {
     }
 
     public void addFile(File file, Directory dir) throws IOException {
-        indexer.addFile(converter.convertFileToDoc(file), dir);
+        indexer.addDoc(converter.convertFileToDoc(file), dir);
     }
 
     public void updateFile(File file) {
