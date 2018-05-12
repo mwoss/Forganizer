@@ -24,7 +24,6 @@ class FileManagerTest {
         fileManager = new FileManager("test", Language.ENGLISH);
     }
 
-
     @Test
     void addFile() throws IOException {
         //Given

@@ -14,6 +14,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 
 public class Searcher {
@@ -49,11 +50,12 @@ public class Searcher {
         return results;
     }
 
-    public Document[] getAllDocs(Directory dir) throws Exception {
+    public Document[] getAllDocs(Directory dir) throws IOException {
         DirectoryReader dirReader = DirectoryReader.open(dir);
+        IndexReader indexReader = DirectoryReader.open(dir);
         IndexSearcher searcher = new IndexSearcher(dirReader);
         Query query = new MatchAllDocsQuery();
-        ScoreDoc[] hits = searcher.search(query, 100_000).scoreDocs;
+        ScoreDoc[] hits = searcher.search(query, indexReader.numDocs()).scoreDocs;
         Document[] docs = new Document[hits.length];
         for (int i = 0; i < hits.length; i++) {
             docs[i] = searcher.doc(hits[i].doc);
