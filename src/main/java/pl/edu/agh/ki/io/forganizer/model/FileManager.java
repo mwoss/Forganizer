@@ -32,13 +32,14 @@ public class FileManager {
 
     }
 
-    public void removeFile(File file) {
-
+    public void removeFile(File file, Directory dir) throws IOException {
+        indexer.removeDoc(converter.convertFileToDoc(file), dir);
     }
 
     List<File> getAllFiles(Directory dir) throws IOException {
         return Arrays.stream(searcher.getAllDocs(dir))
-                .map(converter::convertDocToFile).collect(Collectors.toList());
+                .map(converter::convertDocToFile)
+                .collect(Collectors.toList());
     }
 
 

@@ -41,4 +41,12 @@ public class Indexer {
         indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
         indexWriter.close();
     }
+
+    public void removeDoc(Document doc, Directory dir) throws IOException {
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+        IndexWriter indexWriter = new IndexWriter(dir, config);
+        Term[] terms = {new Term("path", doc.get("path"))};
+        indexWriter.deleteDocuments(terms);
+    }
 }
