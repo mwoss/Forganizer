@@ -8,8 +8,10 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import java.nio.file.Paths;
@@ -30,12 +32,12 @@ public class Searcher {
                 break;
         }
     }
-    // TODO
+
     public Document[] searchField(String fieldName,
                                   String queryString,
+                                  Directory dir,
                                   int resultsNum) throws Exception {
-
-        IndexReader indexReader = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
+        IndexReader indexReader = DirectoryReader.open(dir);
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
         QueryParser queryParser = new QueryParser(fieldName, analyzer);
         Query query = queryParser.parse(queryString);
@@ -47,4 +49,15 @@ public class Searcher {
         return results;
     }
 
+    public Document[] getAllDocs(Directory dir) throws Exception {
+        DirectoryReader dirReader = DirectoryReader.open(dir);
+        IndexSearcher searcher = new IndexSearcher(dirReader);
+        Query query = new MatchAllDocsQuery();
+        ScoreDoc[] hits = searcher.search(query, 100_000).scoreDocs;
+        Document[] docs = new Document[hits.length];
+        for (int i = 0; i < hits.length; i++) {
+            docs[i] = searcher.doc(hits[i].doc);
+        }
+        return docs;
+    }
 }

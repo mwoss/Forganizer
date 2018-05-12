@@ -14,7 +14,7 @@ public class FileManager {
     private Indexer indexer;
     private Converter converter;
 
-    public FileManager(String path,Language language) {
+    public FileManager(String path, Language language) {
         indexer = new Indexer(path, language);
         converter = new Converter();
     }
