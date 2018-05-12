@@ -7,19 +7,14 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.edu.agh.ki.io.forganizer.search.FolderType;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 
-
 import java.io.IOException;
-import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileManagerTest {
     private FileManager fileManager;
@@ -48,7 +43,6 @@ class FileManagerTest {
             e.printStackTrace();
             assert false;
         }
-//        Directory dir = FSDirectory.open(Paths.get("test"));
 
         //Then
         try (DirectoryReader dirReader = DirectoryReader.open(dir)) {
