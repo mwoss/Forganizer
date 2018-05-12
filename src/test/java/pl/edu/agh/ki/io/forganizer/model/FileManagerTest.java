@@ -1,6 +1,5 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
@@ -55,15 +54,15 @@ class FileManagerTest {
         String filePathTest2 = "home/countess/Documents/test2";
         File fileTest1 = new File(fileNameTest1, filePathTest1);
         File fileTest2 = new File(fileNameTest2, filePathTest2);
+        Directory dir = new RAMDirectory();
         //When
         try {
-            fileManager.addFile(fileTest1, FolderType.FS);
-            fileManager.addFile(fileTest2, FolderType.FS);
+            fileManager.addFile(fileTest1, dir);
+            fileManager.addFile(fileTest2, dir);
         } catch (IOException e) {
             e.printStackTrace();
             assert false;
         }
-        Directory dir = FSDirectory.open(Paths.get("test"));
 
         //Then
         try (DirectoryReader dirReader = DirectoryReader.open(dir)) {
@@ -77,6 +76,7 @@ class FileManagerTest {
             assertEquals(fileNameTest2, doc2.get("name"));
         } catch (IOException e) {
             e.printStackTrace();
+            assert false;
         }
 
 

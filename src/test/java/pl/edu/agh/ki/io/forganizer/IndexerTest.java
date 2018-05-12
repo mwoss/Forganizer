@@ -9,6 +9,7 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.ki.io.forganizer.model.Converter;
 import pl.edu.agh.ki.io.forganizer.search.FolderType;
@@ -29,8 +30,9 @@ public class IndexerTest {
         Document document = new Document();
         document.add(new StringField("name", fileName, Field.Store.YES));
         document.add(new StringField("path", filePath, Field.Store.YES));
+        Directory dir = new RAMDirectory();
         try {
-            Directory dir = indexer.addFile(document, FolderType.RAM);
+            indexer.addFile(document, dir);
             DirectoryReader dirReader = DirectoryReader.open(dir);
             IndexSearcher searcher = new IndexSearcher(dirReader);
             Query query = new MatchAllDocsQuery();
