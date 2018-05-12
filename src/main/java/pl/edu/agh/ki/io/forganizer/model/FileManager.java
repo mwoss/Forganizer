@@ -28,8 +28,8 @@ public class FileManager {
         indexer.addDoc(converter.convertFileToDoc(file), dir);
     }
 
-    public void updateFile(File file) {
-
+    public void updateFile(File file, Directory dir) throws IOException {
+        indexer.updateDoc(converter.convertFileToDoc(file), dir);
     }
 
     public void removeFile(File file, Directory dir) throws IOException {

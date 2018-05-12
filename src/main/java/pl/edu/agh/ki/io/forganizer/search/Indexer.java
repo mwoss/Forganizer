@@ -8,11 +8,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 public class Indexer {
 
@@ -30,9 +27,6 @@ public class Indexer {
                 break;
         }
     }
-    // TODO
-    // dir = FSDirectory.open(Paths.get(indexPath));
-    // dir = new RAMDirectory();
 
     private IndexWriter prepareIndexWriter(Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
@@ -42,7 +36,8 @@ public class Indexer {
 
     public void addDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
-        indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
+        Term term = new Term("path", doc.get("path"));
+        indexWriter.updateDocument(term, doc);
         indexWriter.close();
     }
 
@@ -50,9 +45,13 @@ public class Indexer {
         IndexWriter indexWriter = prepareIndexWriter(dir);
         Term[] terms = {new Term("path", doc.get("path"))};
         indexWriter.deleteDocuments(terms);
+        indexWriter.close();
     }
 
     public void updateDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
+        Term term = new Term("path", doc.get("path"));
+        indexWriter.updateDocument(term, doc);
+        indexWriter.close();
     }
 }
