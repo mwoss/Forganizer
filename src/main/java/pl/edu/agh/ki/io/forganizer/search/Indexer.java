@@ -34,19 +34,25 @@ public class Indexer {
     // dir = FSDirectory.open(Paths.get(indexPath));
     // dir = new RAMDirectory();
 
-    public void addDoc(Document doc, Directory dir) throws IOException {
+    private IndexWriter prepareIndexWriter(Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-        IndexWriter indexWriter = new IndexWriter(dir, config);
+        return new IndexWriter(dir, config);
+    }
+
+    public void addDoc(Document doc, Directory dir) throws IOException {
+        IndexWriter indexWriter = prepareIndexWriter(dir);
         indexWriter.updateDocument(new Term("path", doc.get("path")), doc);
         indexWriter.close();
     }
 
     public void removeDoc(Document doc, Directory dir) throws IOException {
-        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-        IndexWriter indexWriter = new IndexWriter(dir, config);
+        IndexWriter indexWriter = prepareIndexWriter(dir);
         Term[] terms = {new Term("path", doc.get("path"))};
         indexWriter.deleteDocuments(terms);
+    }
+
+    public void updateDoc(Document doc, Directory dir) throws IOException {
+        IndexWriter indexWriter = prepareIndexWriter(dir);
     }
 }
