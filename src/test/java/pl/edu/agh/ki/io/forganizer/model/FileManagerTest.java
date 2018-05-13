@@ -1,5 +1,7 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -109,7 +111,9 @@ class FileManagerTest {
         File file6 = new File("script.sh", "home/countess/Documents/dev/scripts")
                 .withTag("scripts")
                 .withComment("to initialize sth");
-        List<File> expectedFiles = Arrays.asList(file1, file2, file3, file4, file5, file6);
+//        List<File> expectedFiles = Arrays.asList(file1, file2, file3, file4, file5, file6);
+        ObservableList<File> expectedFiles = FXCollections.observableArrayList(Arrays.asList(file1, file2, file3, file4, file5, file6));
+
 
 
         try (Directory directory = FSDirectory.open(Paths.get("test"))) {
@@ -124,13 +128,14 @@ class FileManagerTest {
         }
 
         //When
-        List<File> files = null;
+        ObservableList<File> files = null;
         try (Directory directory = FSDirectory.open(Paths.get("test"))) {
             files = fileManager.getAllFiles(directory);
         } catch (IOException e) {
             e.printStackTrace();
             assert false;
         }
+
         //Then
         assertTrue(expectedFiles.containsAll(files));
         assertTrue(files.containsAll(expectedFiles));

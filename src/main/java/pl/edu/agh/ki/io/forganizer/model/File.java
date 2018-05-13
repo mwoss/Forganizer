@@ -13,6 +13,8 @@ public class File extends RecursiveTreeObject<File> {
     public File(String name, String path) {
         this.name = new SimpleStringProperty(name);
         this.path = new SimpleStringProperty(path);
+        this.comment = new SimpleStringProperty();
+        this.tag = new SimpleStringProperty();
     }
 
     public File withComment(String comment) {
@@ -29,6 +31,10 @@ public class File extends RecursiveTreeObject<File> {
         return name.get();
     }
 
+    public StringProperty getNameProperty() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name.set(name);
     }
@@ -37,11 +43,17 @@ public class File extends RecursiveTreeObject<File> {
         return path.get();
     }
 
+    public StringProperty getPathProperty() {
+        return path;
+    }
+
     public void setPath(String path) {
         this.path.set(path);
     }
 
     public String getComment() {
+        if(comment == null)
+            return null;
         return comment.get();
     }
 
@@ -50,8 +62,11 @@ public class File extends RecursiveTreeObject<File> {
     }
 
     public String getTag() {
+        if (tag == null)
+            return null;
         return tag.get();
     }
+
 
     public void setTag(String tag) {
         this.tag.set(tag);

@@ -94,7 +94,7 @@
             <JFXTreeTableColumn fx:id="filePathColumn" prefWidth="168.0" />
         </columns>
     </JFXTreeTableView>
-    <JFXTextField fx:id="searchFiled" alignment="CENTER" layoutX="340.0" layoutY="94.0" prefHeight="25.0" prefWidth="283.0" promptText="Search files" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50">
+    <JFXTextField fx:id="searchField" alignment="CENTER" layoutX="340.0" layoutY="94.0" prefHeight="25.0" prefWidth="283.0" promptText="Search files" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50">
         <font>
             <Font size="14.0" />
         </font>
