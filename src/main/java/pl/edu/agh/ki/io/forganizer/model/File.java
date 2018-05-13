@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 public class File extends RecursiveTreeObject<File>{
 
     /* In tag and comment getters, setters fields are checked if they are not null,
-     because those fields are not initialized on object create */
+     because those fields are not initialized on object init */
 
     private StringProperty name;
     private StringProperty path;

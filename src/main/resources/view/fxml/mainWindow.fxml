@@ -41,17 +41,17 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="allFilesView" alignment="BASELINE_LEFT" layoutY="223.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="All Files">
+                <JFXButton fx:id="allFiles" alignment="BASELINE_LEFT" layoutY="223.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="All Files">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="groupView" alignment="BASELINE_LEFT" layoutY="260.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Groups">
+                <JFXButton fx:id="group" alignment="BASELINE_LEFT" layoutY="260.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Groups">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="tagView" alignment="BASELINE_LEFT" layoutX="1.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Tags">
+                <JFXButton fx:id="tag" alignment="BASELINE_LEFT" layoutX="1.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Tags">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
@@ -61,12 +61,12 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="aboutView" alignment="BASELINE_LEFT" layoutY="378.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="About">
+                <JFXButton fx:id="about" alignment="BASELINE_LEFT" layoutY="378.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="About">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="teamView" alignment="BASELINE_LEFT" layoutY="415.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Team">
+                <JFXButton fx:id="team" alignment="BASELINE_LEFT" layoutY="415.0" mnemonicParsing="false" onAction="#handleChangeView" prefHeight="37.0" prefWidth="200.0" styleClass="button-navigation" text="Team">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
