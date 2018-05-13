@@ -4,7 +4,11 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class File extends RecursiveTreeObject<File> {
+public class File {
+
+    /* In tag and comment getters, setters fields are checked if they are not null,
+     because those fields are not initialized on object create */
+
     private StringProperty name;
     private StringProperty path;
     private StringProperty comment;
@@ -13,8 +17,6 @@ public class File extends RecursiveTreeObject<File> {
     public File(String name, String path) {
         this.name = new SimpleStringProperty(name);
         this.path = new SimpleStringProperty(path);
-        this.comment = new SimpleStringProperty();
-        this.tag = new SimpleStringProperty();
     }
 
     public File withComment(String comment) {
@@ -52,13 +54,20 @@ public class File extends RecursiveTreeObject<File> {
     }
 
     public String getComment() {
-        if(comment == null)
+        if (comment == null)
             return null;
         return comment.get();
     }
 
+    public StringProperty getCommentProperty() {
+        return comment;
+    }
+
     public void setComment(String comment) {
-        this.comment.set(comment);
+        if (this.comment == null)
+            this.comment = new SimpleStringProperty(comment);
+        else
+            this.comment.setValue(comment);
     }
 
     public String getTag() {
@@ -67,9 +76,15 @@ public class File extends RecursiveTreeObject<File> {
         return tag.get();
     }
 
+    public StringProperty getTagProperty() {
+        return tag;
+    }
 
     public void setTag(String tag) {
-        this.tag.set(tag);
+        if (this.tag == null)
+            this.tag = new SimpleStringProperty(tag);
+        else
+            this.tag.set(tag);
     }
 
     @Override
@@ -79,18 +94,18 @@ public class File extends RecursiveTreeObject<File> {
 
         File file = (File) o;
 
-        if (!name.equals(file.name)) return false;
-        if (!path.equals(file.path)) return false;
-        if (comment != null ? !comment.equals(file.comment) : file.comment != null) return false;
-        return tag != null ? tag.equals(file.tag) : file.tag == null;
+        if (!name.get().equals(file.getName())) return false;
+        if (!path.get().equals(file.getPath())) return false;
+        if (comment != null ? !comment.get().equals(file.getComment()) : file.getComment() != null) return false;
+        return tag != null ? tag.get().equals(file.getTag()) : file.getTag() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + path.hashCode();
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        int result = name.get().hashCode();
+        result = 31 * result + path.get().hashCode();
+        result = 31 * result + (comment != null ? comment.get().hashCode() : 0);
+        result = 31 * result + (tag != null ? tag.get().hashCode() : 0);
         return result;
     }
 }

@@ -135,7 +135,9 @@ class FileManagerTest {
             e.printStackTrace();
             assert false;
         }
-
+        files.forEach(System.out::println);
+        System.out.println("***********");
+        expectedFiles.forEach(System.out::println);
         //Then
         assertTrue(expectedFiles.containsAll(files));
         assertTrue(files.containsAll(expectedFiles));
