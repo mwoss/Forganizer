@@ -1,6 +1,8 @@
 package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +20,7 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable{
 
     private final Logger log = Logger.getLogger(MainWindowController.class);
-    private FileManager fileManager;
+    private ObjectProperty<FileManager> fileManager;
 
     @FXML
     private AllFilesController allFilesController;
@@ -26,13 +28,22 @@ public class MainWindowController implements Initializable{
     @FXML
     private BorderPane mainView;
 
+    //Ok i get it. JavaFx flow: constructor -> fields -> initialize method
+    public MainWindowController(){
+        this.fileManager = new SimpleObjectProperty<>();
+        fileManager.setValue(new FileManager(Const.pathIndex, Language.ENGLISH));
+    }
+
     // This looks shitty, but net says it should be done like this ;/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+//        allFilesController.setFileManager(fileManager);
+        allFilesController.fileManagerProperty().bind(fileManager);
+        allFilesController.setupTableView();
         log.info("MainWindow Controller initialized");
-        this.fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
-        allFilesController.setFileManager(fileManager);
     }
+
 
     @FXML
     private void handleChangeView(ActionEvent event) {

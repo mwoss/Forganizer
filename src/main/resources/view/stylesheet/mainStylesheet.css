@@ -38,3 +38,7 @@
 .sidenav{
     -fx-background-color: #5A0026;
 }
+
+.table-column{
+    -fx-alignment: CENTER-LEFT;
+}

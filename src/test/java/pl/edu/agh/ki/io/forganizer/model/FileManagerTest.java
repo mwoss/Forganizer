@@ -111,7 +111,6 @@ class FileManagerTest {
         File file6 = new File("script.sh", "home/countess/Documents/dev/scripts")
                 .withTag("scripts")
                 .withComment("to initialize sth");
-//        List<File> expectedFiles = Arrays.asList(file1, file2, file3, file4, file5, file6);
         ObservableList<File> expectedFiles = FXCollections.observableArrayList(Arrays.asList(file1, file2, file3, file4, file5, file6));
 
 
@@ -135,9 +134,6 @@ class FileManagerTest {
             e.printStackTrace();
             assert false;
         }
-        files.forEach(System.out::println);
-        System.out.println("***********");
-        expectedFiles.forEach(System.out::println);
         //Then
         assertTrue(expectedFiles.containsAll(files));
         assertTrue(files.containsAll(expectedFiles));

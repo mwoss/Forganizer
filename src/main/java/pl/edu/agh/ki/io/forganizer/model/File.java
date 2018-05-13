@@ -4,7 +4,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class File {
+public class File extends RecursiveTreeObject<File>{
 
     /* In tag and comment getters, setters fields are checked if they are not null,
      because those fields are not initialized on object create */
