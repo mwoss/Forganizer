@@ -2,21 +2,18 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import pl.edu.agh.ki.io.forganizer.model.File;
 import pl.edu.agh.ki.io.forganizer.model.FileManager;
+import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
-
 import javafx.beans.value.ChangeListener;
 
 import java.io.IOException;
@@ -25,15 +22,12 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
     private FileChooser fileChooser;
-    private ObjectProperty<FileManager> fileManager;
+    private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
 
-    @FXML
-    private JFXButton addFileButton;
     @FXML
     private JFXTreeTableView<File> allFileTableView;
     @FXML
@@ -43,23 +37,19 @@ public class AllFilesController implements Initializable {
     @FXML
     private JFXTextField searchField;
 
-    public AllFilesController(){
-        this.fileManager = new SimpleObjectProperty<>();
-    }
-
-    // TODO: child controllers are initialized every time certain button are clicked, should be initialized once fix it
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.fileChooser = setupFileChooser();
+        setupTableView();
         log.info("AllFile Controller initialized");
     }
 
-    public void setupTableView() {
+    private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             allFileTableView.setRoot(new RecursiveTreeItem<>(
-                    fileManagerProperty().get().getAllFiles(dir),
+                    fileManager.getAllFiles(dir),
                     RecursiveTreeObject::getChildren));
         } catch (IOException e) {
             log.error(e.getMessage());
@@ -94,12 +84,11 @@ public class AllFilesController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
                 String fileName = selectedFile.getName();
-                fileManagerProperty().get().addFile(
+                fileManager.addFile(
                         new File(fileName, path),
                         FSDirectory.open(Paths.get(Const.pathIndex))
                 );
                 log.info(String.format("File path: %s, file name: %s", path, fileName));
-                System.out.println(fileManager.toString());
             } else {
                 log.error("File not specified");
             }
@@ -116,13 +105,6 @@ public class AllFilesController implements Initializable {
         return fileChooser;
     }
 
-//    public void setFileManager(FileManager fileManager) {
-//        this.fileManager = fileManager;
-//    }
-
-    public ObjectProperty<FileManager> fileManagerProperty() {
-        return fileManager;
-    }
 }
 
 

@@ -9,7 +9,6 @@ import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
@@ -43,6 +42,4 @@ public class FileManager {
                 .map(converter::convertDocToFile)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
-
-
 }
