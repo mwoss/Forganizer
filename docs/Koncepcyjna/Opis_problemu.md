@@ -31,3 +31,16 @@ Użytkownik w dzisiejszych czasach często pracuje na różnych systemach operac
 * Wyszukiwanie po zawartości w plikach tekstowych można zrealizować traktując tekst jako dodatkowe pole dla wyszukiwarki.
 * Obsługę różnych systemów plików można zapewnić za pomocą wykorzystania bibliotek, które są kompatybilne z różnymi systemami plików.
 * Możliwość grupowania plików w zbiory, umożliwiające łatwe wyszukanie plików o tych samych zastosowaniach.
+
+***
+
+### Podsumowanie 
+
+Porównując powyższe zestawienie, wnioskujemy, że spora część przytoczonych potrzeb użytkownika  nie jest obecnie spełniona. 
+Dotyczy to przede wszystkim następujących przeszkód : 
+
+* niemożliwość podzielenia plików w grupy według kryteriów użytkownika, czyli dodania tak zwanych wielu tagów do różnych plików 
+* niemożliwość dodania do plików dodatkowych informacji opisujących plik poza nazwą, tak zwanych komentarzy
+* niemożliwość wyszukiwania po zawortości wielu plików jednocześnie
+
+Potrzeby dzisiejszego użytkownika komputera w zakresie zarządzania danymi są duże. Niejednokrotnie użytkownik ma problem ze znalezieniem tego konkretnego pliku o który mu chodzi, co spowodowane jest ograniczoną ilością sposobów wyszukiwania. Powszechnie dostępne możliwości wyszukiwania plików mimo iż działają przeważnie dokładnie i niezawodnie, to nie oferują zbyt rozbudowanej możliwości zarządzania nimi. Dzięki naszemu programu użytkownik dostaje narzędzie które dysponuje wszystkimi tymi funkcjami, jest też dodatkowo przenośne na inne platformy i posiada przyjazny interfejs graficzny. 
