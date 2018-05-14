@@ -8,3 +8,4 @@
 | Odejście od Javy na rzecz innych technologii i języka| Konieczność zapoznania się z nową technologią| Średnie
 | Błąd projektowy - zły podział na moduły| Skomplikowanie implementacji, zwiększona ilość błędów implementacji| Duże
 | Błąd projektowy - złe rozpoznanie przypadków użycia| Produkt niezgodny z oczekiwaniami klienta| Duże
+| Problem z integracją aplikacji na linii front-end - back-end| Powstanie dwóch niepołączonych modułów, bez gotowego produktu| Średnie
