@@ -20,6 +20,7 @@ import java.util.Date;
 
 public class IndexFiles {
 
+    // TODO: remove this class
     private IndexFiles() {
     }
 

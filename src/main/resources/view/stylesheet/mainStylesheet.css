@@ -4,6 +4,11 @@
     -fx-border-insets: 0;
     -fx-border-style: dashed;
     -fx-padding: 5 0 5 5;
+    -fx-spacing: 5;
+}
+
+.hbox-style{
+    -fx-spacing: 5;
 }
 
 .header{
@@ -37,4 +42,8 @@
 
 .sidenav{
     -fx-background-color: #5A0026;
+}
+
+.table-column{
+    -fx-alignment: CENTER-LEFT;
 }
