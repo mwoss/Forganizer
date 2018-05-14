@@ -4,6 +4,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+//TODO: store information about file type and size
 public class File extends RecursiveTreeObject<File>{
 
     /* In tag and comment getters, setters fields are checked if they are not null,

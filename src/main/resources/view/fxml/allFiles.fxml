@@ -24,33 +24,66 @@
     </AnchorPane>
     <AnchorPane layoutY="51.0" prefHeight="526.0" prefWidth="328.0" BorderPane.alignment="CENTER">
         <children>
-            <VBox layoutX="31.0" layoutY="82.0" prefHeight="243.0" prefWidth="267.0" spacing="5" styleClass="vbox-style">
+            <VBox layoutX="31.0" layoutY="82.0" prefHeight="243.0" prefWidth="267.0" styleClass="vbox-style">
                 <children>
                     <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:">
                         <font>
                             <Font name="Century Gothic Bold" size="20.0" />
                         </font>
                     </Label>
-                    <Label text="Size:">
+               <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
+                  <children>
+                          <Label text="Size:">
+                              <font>
+                                  <Font name="Century Gothic" size="15.0" />
+                              </font>
+                          </Label>
+                     <Label fx:id="sizeLabel">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
+                           <Font name="Century Gothic" size="15.0" />
                         </font>
-                    </Label>
-                    <Label text="File Type:">
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
+                  <children>
+                          <Label text="File Type:">
+                              <font>
+                                  <Font name="Century Gothic" size="15.0" />
+                              </font>
+                          </Label>
+                     <Label fx:id="typeLabel">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
-                        </font>
-                    </Label>
-                    <Label text="Tags:">
+                           <Font name="Century Gothic" size="15.0" />
+                        </font></Label>
+                  </children>
+               </HBox>
+               <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
+                  <children>
+                          <Label text="Tags:">
+                              <font>
+                                  <Font name="Century Gothic" size="15.0" />
+                              </font>
+                          </Label>
+                     <Label fx:id="tagLabel">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
-                        </font>
-                    </Label>
-                    <Label text="Comment:">
+                           <Font name="Century Gothic" size="15.0" />
+                        </font></Label>
+                  </children>
+               </HBox>
+               <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
+                  <children>
+                          <Label text="Comment:">
+                              <font>
+                                  <Font name="Century Gothic" size="15.0" />
+                              </font>
+                          </Label>
+                     <Label fx:id="commentLabel">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
-                        </font>
-                    </Label>
+                           <Font name="Century Gothic" size="15.0" />
+                        </font></Label>
+                  </children>
+               </HBox>
                     <HBox alignment="CENTER" prefHeight="77.0" prefWidth="256.0">
                         <children>
                             <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="button-action" text="Add tag">

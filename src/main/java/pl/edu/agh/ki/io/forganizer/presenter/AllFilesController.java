@@ -3,8 +3,10 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
@@ -20,13 +22,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 
+//TODO: Add this controller to controller map at app start
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
     private FileChooser fileChooser;
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
+    private ObservableList<File> filesList;
 
     @FXML
     private JFXTreeTableView<File> allFileTableView;
@@ -36,6 +41,14 @@ public class AllFilesController implements Initializable {
     private JFXTreeTableColumn<File, String> filePathColumn;
     @FXML
     private JFXTextField searchField;
+    @FXML
+    private Label tagLabel;
+    @FXML
+    private Label sizeLabel;
+    @FXML
+    private Label typeLabel;
+    @FXML
+    private Label commentLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,14 +61,28 @@ public class AllFilesController implements Initializable {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+            filesList = fileManager.getAllFiles(dir);
             allFileTableView.setRoot(new RecursiveTreeItem<>(
-                    fileManager.getAllFiles(dir),
+                    filesList,
                     RecursiveTreeObject::getChildren));
         } catch (IOException e) {
             log.error(e.getMessage());
         }
         allFileTableView.setShowRoot(false);
+        addSelectedItemListener();
         searchField.textProperty().addListener(setupSearchField(allFileTableView));
+    }
+
+    //TODO: just for prototyping
+    private void addSelectedItemListener() {
+        allFileTableView.getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldSelection, newSelection) -> {
+                    int test = ThreadLocalRandom.current().nextInt(0, 100);
+                    sizeLabel.setText("size" + test);
+                    typeLabel.setText("type" + test);
+                    tagLabel.setText("tag" + test);
+                    commentLabel.setText("comment" + test);
+                });
     }
 
     private <T> void setupCellValueFactory(JFXTreeTableColumn<File, T> column, Function<File, ObservableValue<T>> mapper) {
@@ -84,10 +111,12 @@ public class AllFilesController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
                 String fileName = selectedFile.getName();
+                File newFile = new File(fileName, path);
                 fileManager.addFile(
-                        new File(fileName, path),
+                        newFile,
                         FSDirectory.open(Paths.get(Const.pathIndex))
                 );
+                filesList.add(newFile);
                 log.info(String.format("File path: %s, file name: %s", path, fileName));
             } else {
                 log.error("File not specified");

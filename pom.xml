@@ -46,11 +46,6 @@
             <artifactId>jfoenix</artifactId>
             <version>8.0.4</version>
         </dependency>
-        <dependency>
-            <groupId>io.datafx</groupId>
-            <artifactId>flow</artifactId>
-            <version>8.0.1</version>
-        </dependency>
 
         <!--LUCENE-->
         <dependency>
