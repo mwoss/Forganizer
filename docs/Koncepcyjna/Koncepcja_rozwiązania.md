@@ -11,7 +11,7 @@ _**System składa się z:**_
 * Modułu interfejsu użytkownika który będzie przyjmował od użytkownika, zapytania i kryterium do wyszukiwania oraz pliki do dodania i komentarze.
 * Modułu wyszukiwania który będzie wyszukiwał indeksowane pliki według zapytania  i kryterium od modułu UI.
 * Moduł komentowania  który będzie dodawał do plików komentarz, otrzymany przez moduł UI.
-* Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do bazy i indeksował je.
+* Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do lokalnego folderu w którym będzie indeksował je.
 * Baza, relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
 
 ![](https://github.com/agh-ki-io/Forganizer/blob/master/docs/Koncepcyjna/architektura_systemu.png)
@@ -46,13 +46,13 @@ _Rys. 1. Schemat architektury systemu._
 * pobieranie danych od użytkownika
 * zwracanie wyników
 
-**b)Moduł wyszukiwania po nazwie:**
+**b) Moduł wyszukiwania po nazwie:**
 * wyszukanie po indeksowanego pliku po nazwie
 
-**c)Moduł wyszukiwania po tagu:**
+**c) Moduł wyszukiwania po tagu:**
 * wyszukanie po indeksowanego pliku po tagu pod jakim się on znajduje
 
-**d)Moduł wyszukiwania po komentarzu:**
+**d) Moduł wyszukiwania po komentarzu:**
 * wyszukanie po indeksowanego pliku po komentarzu dodanym do niego
 
 **e) Moduł dodawania komentarzy do pliku:**
