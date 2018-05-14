@@ -3,6 +3,7 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,6 +67,7 @@ public class AllFilesController implements Initializable {
                     filesList,
                     RecursiveTreeObject::getChildren));
         } catch (IOException e) {
+            filesList = FXCollections.observableArrayList();
             log.error(e.getMessage());
         }
         allFileTableView.setShowRoot(false);
