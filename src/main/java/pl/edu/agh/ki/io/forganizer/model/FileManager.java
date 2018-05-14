@@ -1,5 +1,7 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.lucene.store.Directory;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
@@ -7,7 +9,6 @@ import pl.edu.agh.ki.io.forganizer.search.Searcher;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
@@ -36,11 +37,9 @@ public class FileManager {
         indexer.removeDoc(converter.convertFileToDoc(file), dir);
     }
 
-    List<File> getAllFiles(Directory dir) throws IOException {
+    public ObservableList<File> getAllFiles(Directory dir) throws IOException {
         return Arrays.stream(searcher.getAllDocs(dir))
                 .map(converter::convertDocToFile)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
-
-
 }

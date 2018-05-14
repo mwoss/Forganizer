@@ -1,56 +1,91 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
-public class File {
-    private String name;
-    private String path;
-    private String comment;
-    private String tag;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+//TODO: store information about file type and size
+public class File extends RecursiveTreeObject<File>{
+
+    /* In tag and comment getters, setters fields are checked if they are not null,
+     because those fields are not initialized on object init */
+
+    private StringProperty name;
+    private StringProperty path;
+    private StringProperty comment;
+    private StringProperty tag;
 
     public File(String name, String path) {
-        this.name = name;
-        this.path = path;
+        this.name = new SimpleStringProperty(name);
+        this.path = new SimpleStringProperty(path);
     }
 
     public File withComment(String comment) {
-        this.comment = comment;
+        this.comment = new SimpleStringProperty(comment);
         return this;
     }
 
     public File withTag(String tag) {
-        this.tag = tag;
+        this.tag = new SimpleStringProperty(tag);
         return this;
     }
 
     public String getName() {
+        return name.get();
+    }
+
+    public StringProperty getNameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getPath() {
+        return path.get();
+    }
+
+    public StringProperty getPathProperty() {
         return path;
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.path.set(path);
     }
 
     public String getComment() {
+        if (comment == null)
+            return null;
+        return comment.get();
+    }
+
+    public StringProperty getCommentProperty() {
         return comment;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        if (this.comment == null)
+            this.comment = new SimpleStringProperty(comment);
+        else
+            this.comment.setValue(comment);
     }
 
     public String getTag() {
+        if (tag == null)
+            return null;
+        return tag.get();
+    }
+
+    public StringProperty getTagProperty() {
         return tag;
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        if (this.tag == null)
+            this.tag = new SimpleStringProperty(tag);
+        else
+            this.tag.set(tag);
     }
 
     @Override
@@ -60,18 +95,18 @@ public class File {
 
         File file = (File) o;
 
-        if (!name.equals(file.name)) return false;
-        if (!path.equals(file.path)) return false;
-        if (comment != null ? !comment.equals(file.comment) : file.comment != null) return false;
-        return tag != null ? tag.equals(file.tag) : file.tag == null;
+        if (!name.get().equals(file.getName())) return false;
+        if (!path.get().equals(file.getPath())) return false;
+        if (comment != null ? !comment.get().equals(file.getComment()) : file.getComment() != null) return false;
+        return tag != null ? tag.get().equals(file.getTag()) : file.getTag() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + path.hashCode();
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        int result = name.get().hashCode();
+        result = 31 * result + path.get().hashCode();
+        result = 31 * result + (comment != null ? comment.get().hashCode() : 0);
+        result = 31 * result + (tag != null ? tag.get().hashCode() : 0);
         return result;
     }
 }

@@ -23,6 +23,7 @@ import java.util.Date;
 
 public class SearchFiles {
 
+    // TODO: remove this class
     private SearchFiles() {
     }
 
