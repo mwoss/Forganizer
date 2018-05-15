@@ -15,7 +15,7 @@ public final class Const {
     public static final String filePathProperty = "path";
 
     /* File size property */
-    public static final String sizeTypeProperty = "size";
+    public static final String fileSizeProperty = "size";
 
     /* File type property */
     public static final String fileTypeProperty = "fileType";

@@ -86,8 +86,8 @@ public class AllFilesController implements Initializable {
                     File selectedFile = newSelection.getValue();
                     sizeLabel.setText(SizeConverter.getReadableFileSize(selectedFile.getSize()));
                     typeLabel.setText(selectedFile.getFileType());
-                    tagLabel.setText(null);
-                    commentLabel.setText(null);
+                    tagLabel.setText(selectedFile.getTag());
+                    commentLabel.setText(selectedFile.getComment());
                 });
     }
 
