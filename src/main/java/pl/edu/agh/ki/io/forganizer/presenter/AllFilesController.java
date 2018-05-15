@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TreeTableColumn;
 import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
@@ -24,12 +25,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.spi.FileTypeDetector;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 
 //TODO: Add this controller to controller map at app start
+//TODO: should be optimized somehow
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
@@ -88,6 +89,7 @@ public class AllFilesController implements Initializable {
                     typeLabel.setText(selectedFile.getFileType());
                     tagLabel.setText(selectedFile.getTag());
                     commentLabel.setText(selectedFile.getComment());
+                    log.info(selectedFile.getComment());
                 });
     }
 
@@ -111,6 +113,7 @@ public class AllFilesController implements Initializable {
                 });
     }
 
+    //TODO: handle unrecognized files type
     public void addFileButtonOnAction() {
         java.io.File selectedFile = fileChooser.showOpenDialog(null);
         try {
@@ -132,6 +135,21 @@ public class AllFilesController implements Initializable {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+    }
+
+    public void addCommentButtonOnAction(){
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Comment section");
+        Optional<String> result = dialog.showAndWait();
+        allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue()
+                .setComment(result.orElse(null));
+    }
+
+    public void addTagButtonOnAction(){
+
     }
 
     //TODO: consider moving FileChose to separate class
