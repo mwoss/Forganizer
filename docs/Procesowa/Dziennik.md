@@ -17,5 +17,8 @@
 | **6 V 2018** | Stworzenie testów jednostokych i integracyjnych modułów |
 | **9 V 2018** | Stworzenie konwertera pomiędzy file oraz doc |
 | **12 V 2018** | Testowanie funkcjonalności dodanie obsługi doc'ów i file'ów |
+| **14 V 2018** | Stworzenie działającego modułu dodawania plików łącznie z integracją z GUI |
+| **15 V 2018** | Skompletowanie gotowej dokumentacji koncepcyjnej i specyfikacyjnej |
+
 
 
