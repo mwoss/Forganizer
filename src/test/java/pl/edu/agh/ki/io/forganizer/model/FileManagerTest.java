@@ -56,8 +56,12 @@ class FileManagerTest {
         String fileNameTest2 = "xDD.txt";
         String filePathTest1 = "home/countess/Documents/test1";
         String filePathTest2 = "home/countess/Documents/test2";
-        File fileTest1 = new File(fileNameTest1, filePathTest1);
-        File fileTest2 = new File(fileNameTest2, filePathTest2);
+        Long fileSizeTest1 = 123123L;
+        Long fileSizeTest2 = 5555L;
+        String fileTypeTest1 = "image";
+        String fileTypeTest2 = "executable";
+        File fileTest1 = new File(fileNameTest1, filePathTest1, fileSizeTest1, fileTypeTest1);
+        File fileTest2 = new File(fileNameTest2, filePathTest2, fileSizeTest2, fileTypeTest2);
         Directory dir = new RAMDirectory();
         //When
         try {
@@ -99,16 +103,16 @@ class FileManagerTest {
     @Test
     void getAllFilesTest() {
         //Given
-        File file1 = new File("xDD", "home/countess/Documents/test1")
+        File file1 = new File("xDD", "home/countess/Documents/test1.exe", 4444L, "executable")
                 .withComment("lol");
-        File file2 = new File("important-file.txt", "home/countess/Documents/test2/more/important");
-        File file3 = new File("my-picture.png", "home/countess/Documents/pictures")
+        File file2 = new File("important-file.txt", "home/countess/Documents/test2/more/important", 1234L, "text");
+        File file3 = new File("my-picture.png", "home/countess/Documents/pictures", 55555L, "image")
                 .withTag("picture");
-        File file4 = new File("my-picture2.png", "home/countess/Documents/pictures")
+        File file4 = new File("my-picture2.png", "home/countess/Documents/pictures", 7777L, "image")
                 .withTag("picture");
-        File file5 = new File("my-picture3.png", "home/countess/Documents/pictures")
+        File file5 = new File("my-picture3.png", "home/countess/Documents/pictures", 86534L, "image")
                 .withTag("picture");
-        File file6 = new File("script.sh", "home/countess/Documents/dev/scripts")
+        File file6 = new File("script.sh", "home/countess/Documents/dev/scripts", 12L, "script")
                 .withTag("scripts")
                 .withComment("to initialize sth");
         ObservableList<File> expectedFiles = FXCollections.observableArrayList(Arrays.asList(file1, file2, file3, file4, file5, file6));
