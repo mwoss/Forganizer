@@ -8,7 +8,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="521.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.TagController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.TagController"
+            stylesheets="@../stylesheet/mainStylesheet.css">
     <children>
         <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0">
