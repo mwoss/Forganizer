@@ -18,10 +18,13 @@ import pl.edu.agh.ki.io.forganizer.model.FileManager;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 import javafx.beans.value.ChangeListener;
+import pl.edu.agh.ki.io.forganizer.utils.SizeConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.spi.FileTypeDetector;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
@@ -58,6 +61,7 @@ public class AllFilesController implements Initializable {
         log.info("AllFile Controller initialized");
     }
 
+    //TODO: fix bug, that doesnt show first file when index dir is not created
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
@@ -79,11 +83,11 @@ public class AllFilesController implements Initializable {
     private void addSelectedItemListener() {
         allFileTableView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSelection, newSelection) -> {
-                    int test = ThreadLocalRandom.current().nextInt(0, 100);
-                    sizeLabel.setText("size" + test);
-                    typeLabel.setText("type" + test);
-                    tagLabel.setText("tag" + test);
-                    commentLabel.setText("comment" + test);
+                    File selectedFile = newSelection.getValue();
+                    sizeLabel.setText(SizeConverter.getReadableFileSize(selectedFile.getSize()));
+                    typeLabel.setText(selectedFile.getFileType());
+                    tagLabel.setText(null);
+                    commentLabel.setText(null);
                 });
     }
 
@@ -113,7 +117,8 @@ public class AllFilesController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
                 String fileName = selectedFile.getName();
-                File newFile = new File(fileName, path);
+                File newFile = new File(fileName, path, selectedFile.length(),
+                        Files.probeContentType(selectedFile.toPath()));
                 fileManager.addFile(
                         newFile,
                         FSDirectory.open(Paths.get(Const.pathIndex))
@@ -129,6 +134,7 @@ public class AllFilesController implements Initializable {
         }
     }
 
+    //TODO: consider moving FileChose to separate class
     private FileChooser setupFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");
