@@ -149,7 +149,14 @@ public class AllFilesController implements Initializable {
     }
 
     public void addTagButtonOnAction(){
-
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Tag section");
+        Optional<String> result = dialog.showAndWait();
+        allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue()
+                .setComment(result.orElse(null));
     }
 
     //TODO: consider moving FileChose to separate class
