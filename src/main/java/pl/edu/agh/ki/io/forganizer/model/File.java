@@ -24,6 +24,8 @@ public class File extends RecursiveTreeObject<File> {
         this.path = new SimpleStringProperty(path);
         this.size = new SimpleLongProperty(size);
         this.fileType = new SimpleStringProperty(fileType);
+        this.comment = new SimpleStringProperty("");
+        this.tag = new SimpleStringProperty("");
     }
 
     public File withComment(String comment) {

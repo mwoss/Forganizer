@@ -68,12 +68,14 @@ public class AllFilesController implements Initializable {
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             filesList = fileManager.getAllFiles(dir);
-            allFileTableView.setRoot(new RecursiveTreeItem<>(
-                    filesList,
-                    RecursiveTreeObject::getChildren));
         } catch (IOException e) {
             filesList = FXCollections.observableArrayList();
             log.error(e.getMessage());
+        } finally {
+            allFileTableView.setRoot(new RecursiveTreeItem<>(
+                    filesList,
+                    RecursiveTreeObject::getChildren
+            ));
         }
         allFileTableView.setShowRoot(false);
         addSelectedItemListener();
@@ -81,6 +83,7 @@ public class AllFilesController implements Initializable {
     }
 
     //TODO: just for prototyping
+
     private void addSelectedItemListener() {
         allFileTableView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSelection, newSelection) -> {
@@ -109,7 +112,9 @@ public class AllFilesController implements Initializable {
                 tableView.setPredicate(fileProp -> {
                     final File file = fileProp.getValue();
                     return file.getName().contains(newVal)
-                            || file.getPath().contains(newVal);
+                            || file.getPath().contains(newVal)
+                            || file.getComment().contains(newVal);
+
                 });
     }
 
@@ -137,29 +142,40 @@ public class AllFilesController implements Initializable {
         }
     }
 
-    public void addCommentButtonOnAction(){
+    public void addCommentButtonOnAction() {
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Comment section");
         Optional<String> result = dialog.showAndWait();
-        allFileTableView.getSelectionModel()
+        File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
-                .getValue()
-                .setComment(result.orElse(null));
+                .getValue();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))){
+            fileManager.updateFile(file.withComment(result.orElse(null)), dir);
+        }catch (IOException e){
+            log.error(e);
+        }
+        commentLabel.setText(result.orElse(null));
     }
 
-    public void addTagButtonOnAction(){
+    public void addTagButtonOnAction() {
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Tag section");
         Optional<String> result = dialog.showAndWait();
-        allFileTableView.getSelectionModel()
+        File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
-                .getValue()
-                .setComment(result.orElse(null));
+                .getValue();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))){
+            fileManager.updateFile(file.withTag(result.orElse(null)), dir);
+        }catch (IOException e){
+            log.error(e);
+        }
+        tagLabel.setText(result.orElse(null));
     }
 
     //TODO: consider moving FileChose to separate class
+    //TODO: enable adding few files in the same time
     private FileChooser setupFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");
