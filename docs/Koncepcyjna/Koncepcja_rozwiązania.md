@@ -11,8 +11,7 @@ _**System składa się z:**_
 * Modułu interfejsu użytkownika który będzie przyjmował od użytkownika, zapytania i kryterium do wyszukiwania oraz pliki do dodania i komentarze.
 * Modułu wyszukiwania który będzie wyszukiwał indeksowane pliki według zapytania  i kryterium od modułu UI.
 * Moduł komentowania  który będzie dodawał do plików komentarz, otrzymany przez moduł UI.
-* Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do bazy i indeksował je.
-* Baza, relacyjna baza danych w której będzie trzymany plik tj. nazwa pliku, ścieżka do niego, komentarz jeśli taki będzie oraz id.
+* Moduł dodawania plików, który będzie dodawał nazwę pliku i ścieżkę do niego otrzymane od modułu UI do lokalnego folderu w którym będzie indeksował je.
 
 ![](https://github.com/agh-ki-io/Forganizer/blob/master/docs/Koncepcyjna/architektura_systemu.png)
 
@@ -32,11 +31,9 @@ _Rys. 1. Schemat architektury systemu._
 **c) dodawanie komentarzy:**
 * Moduł dodawania komentarzy do pliku
 
-**d)dodawanie pliku**
+**d) dodawanie pliku**
 * Moduł dodawania pliku
 * Moduł indeksowania pliku
-
-**e) baza z nazwą pliku i ścieżką do niego**
 
 
 ### 4. Zakres odpowiedzialności modułów:
@@ -46,37 +43,37 @@ _Rys. 1. Schemat architektury systemu._
 * pobieranie danych od użytkownika
 * zwracanie wyników
 
-**b)Moduł wyszukiwania po nazwie:**
-* wyszukanie po indeksowanego pliku po nazwie
+**b) Moduł wyszukiwania po nazwie:**
+* wyszukanie zindeksowanego pliku po nazwie
 
-**c)Moduł wyszukiwania po tagu:**
-* wyszukanie po indeksowanego pliku po tagu pod jakim się on znajduje
+**c) Moduł wyszukiwania po tagu:**
+* wyszukanie zindeksowanego pliku po tagu pod jakim się on znajduje
 
-**d)Moduł wyszukiwania po komentarzu:**
-* wyszukanie po indeksowanego pliku po komentarzu dodanym do niego
+**d) Moduł wyszukiwania po komentarzu:**
+* wyszukanie zindeksowanego pliku po komentarzu dodanym do niego
 
 **e) Moduł dodawania komentarzy do pliku:**
 * dodanie do pliku komentarzu
 
 **f) Moduł dodawania pliku:**
-* dodanie do bazy pliku tj. jego nazwy i ścieżki do niego.
+* dodanie do folderu z indeksami tj. jego nazwy i ścieżki do niego.
 
 **g) Moduł indeksowania pliku:**
-* po indeksowanie plików w celu ich późniejszego wyszukiwania
+* poindeksowanie plików w celu ich późniejszego wyszukiwania
 
-**h) baza z nazwą pliku i ścieżką do niego:**
-* przechowywanie nazwy pliku, ścieżki do niego, jego tagu i id.
 
 ### 5. Współpraca modułów
 
-Przepływ informacji między modułami odbywa się przy pomocy struktur języka programowania Java. Dane o plikach znajdują się w bazie MySQL.
+Przepływ informacji między modułami odbywa się przy pomocy struktur języka programowania Java. Dane o plikach znajdują się w folderze lokalnym łącznie z wszystkimi indeksami.
 
-Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby wyszukać plik, oraz kryterium wyszukiwania. Moduł UI jest również odpowiedzialny za wyświetlanie danych i kryterium. Nastepnie jest tworzony obiekt, który jest przesyłany do modułu wyszukiwania, który wysyła zapytanie do bazy o pliki, które spełniają kryterium wyszukiwania. Baza przekazuje listę plików modułowi wyszukiwania, który przekazuje je do Modułu GUI, który je otrzymuje i wyświetla dla użytkownika.
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby wyszukać plik oraz kryterium wyszukiwania. Moduł UI jest również odpowiedzialny za wyświetlanie danych i kryterium. Nastepnie jest tworzony obiekt, który jest przesyłany do modułu wyszukiwania, który korzystając z folderu z indeksami wyszukuje pliki spełniające kryterium wyszukiwania. Moduł wyszukiwania mając już listę plików przekazuje je do Modułu GUI, który je otrzymuje i wyświetla dla użytkownika.
 
-Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby nadać plikowi jakąś własność (komentarz bądź tag) i wprowadza potrzebne do tego informacje. Moduł UI również wyświetla wprowadzone dane. Nastepnie jest tworzony obiekt, który jest dostarczany modułowi komentowania, który wyśle do bazy zmianę w postaci komentarzu/tagu.
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o tym, w jaki sposób chiałby nadać plikowi jakąś własność (komentarz bądź tag) i wprowadza potrzebne do tego informacje. Moduł UI również wyświetla wprowadzone dane. Nastepnie jest tworzony obiekt, który jest dostarczany modułowi komentowania, który zrobi odpowiednią zmianę w folderze lokalnym w postaci komentarzu/tagu.
 
-Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o pliku, który chciałby dodać do programu, w raz z potrzebnymi danymi, nastepnie towrzy obiekt, który będzie przekazany modułowi dodawania plików. Modłu UI również wyświetla wprowadzone dane. Moduł dodawania plików dodaje do bazy nowy plik.
+Użytkownik wprowadza do Modułu UI (Interfejs Użytkownika) informacje o pliku, który chciałby dodać do programu, w raz z potrzebnymi danymi, nastepnie towrzy obiekt, który będzie przekazany modułowi dodawania plików. Modłu UI również wyświetla wprowadzone dane. Moduł dodawania plików dodaje do lokalnego indeks folderu nowy plik.
 
-Baza otrzymuje zapytania od modułów: komentowania, dodawania plików i wyszukiwania. Dodaje rekordy lub je modyfikuje.
 
+![](https://github.com/agh-ki-io/Forganizer/blob/master/docs/Koncepcyjna/diagram_sekwencji.png)
+
+_Rys. 1. Diagram sekwencji._
 ***
