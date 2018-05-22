@@ -62,7 +62,6 @@ public class AllFilesController implements Initializable {
         log.info("AllFile Controller initialized");
     }
 
-    //TODO: fix bug, that doesnt show first file when index dir is not created
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
@@ -87,12 +86,13 @@ public class AllFilesController implements Initializable {
     private void addSelectedItemListener() {
         allFileTableView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSelection, newSelection) -> {
-                    File selectedFile = newSelection.getValue();
-                    sizeLabel.setText(SizeConverter.getReadableFileSize(selectedFile.getSize()));
-                    typeLabel.setText(selectedFile.getFileType());
-                    tagLabel.setText(selectedFile.getTag());
-                    commentLabel.setText(selectedFile.getComment());
-                    log.info(selectedFile.getComment());
+                    if (newSelection != null) {
+                        File selectedFile = newSelection.getValue();
+                        sizeLabel.setText(SizeConverter.getReadableFileSize(selectedFile.getSize()));
+                        typeLabel.setText(selectedFile.getFileType());
+                        tagLabel.setText(selectedFile.getTag());
+                        commentLabel.setText(selectedFile.getComment());
+                    }
                 });
     }
 
@@ -150,9 +150,9 @@ public class AllFilesController implements Initializable {
                 .selectedItemProperty()
                 .get()
                 .getValue();
-        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))){
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             fileManager.updateFile(file.withComment(result.orElse(null)), dir);
-        }catch (IOException e){
+        } catch (IOException e) {
             log.error(e);
         }
         commentLabel.setText(result.orElse(null));
@@ -166,9 +166,9 @@ public class AllFilesController implements Initializable {
                 .selectedItemProperty()
                 .get()
                 .getValue();
-        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))){
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             fileManager.updateFile(file.withTag(result.orElse(null)), dir);
-        }catch (IOException e){
+        } catch (IOException e) {
             log.error(e);
         }
         tagLabel.setText(result.orElse(null));
