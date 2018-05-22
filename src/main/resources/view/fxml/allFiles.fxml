@@ -86,7 +86,7 @@
                </HBox>
                     <HBox alignment="CENTER" prefHeight="77.0" prefWidth="256.0">
                         <children>
-                            <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="button-action" text="Add tag">
+                            <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTagButtonOnAction" styleClass="button-action" text="Add tag">
                                 <HBox.margin>
                                     <Insets right="20.0" />
                                 </HBox.margin>
@@ -94,7 +94,7 @@
                                     <Font name="System Bold" size="14.0" />
                                 </font>
                             </JFXButton>
-                            <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="button-action" text="Add comment">
+                            <JFXButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCommentButtonOnAction" styleClass="button-action" text="Add comment">
                                 <font>
                                     <Font name="System Bold" size="14.0" />
                                 </font>

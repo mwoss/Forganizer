@@ -5,34 +5,41 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeTableColumn;
-import javafx.stage.FileChooser;
+import javafx.scene.control.*;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.omg.PortableInterceptor.INACTIVE;
 import pl.edu.agh.ki.io.forganizer.model.File;
 import pl.edu.agh.ki.io.forganizer.model.FileManager;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 import javafx.beans.value.ChangeListener;
+import pl.edu.agh.ki.io.forganizer.utils.FileLoader;
+import pl.edu.agh.ki.io.forganizer.utils.SizeConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 
 //TODO: Add this controller to controller map at app start
+//TODO: should be optimized somehow
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
-    private FileChooser fileChooser;
+    private FileLoader fileChooser;
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
+
+    private TextInputDialog inputDialog;
+    private TextArea textArea;
 
     @FXML
     private JFXTreeTableView<File> allFileTableView;
@@ -53,37 +60,56 @@ public class AllFilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.fileChooser = setupFileChooser();
+        this.fileChooser = new FileLoader();
+        this.inputDialog = new TextInputDialog("");
+        this.textArea = new TextArea();
         setupTableView();
+        setupInputDialog();
         log.info("AllFile Controller initialized");
     }
+
+    private void setupInputDialog() {
+        inputDialog.setHeaderText("Input data in box below");
+        inputDialog.setGraphic(null);
+        inputDialog.setResizable(true);
+        inputDialog.getDialogPane().getStylesheets().add(
+                getClass().getResource("/view/stylesheet/dialogStylesheet.css").toExternalForm()
+        );
+        this.textArea.setWrapText(true);
+        inputDialog.getDialogPane().setContent(textArea);
+    }
+
 
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             filesList = fileManager.getAllFiles(dir);
-            allFileTableView.setRoot(new RecursiveTreeItem<>(
-                    filesList,
-                    RecursiveTreeObject::getChildren));
         } catch (IOException e) {
             filesList = FXCollections.observableArrayList();
             log.error(e.getMessage());
+        } finally {
+            allFileTableView.setRoot(new RecursiveTreeItem<>(
+                    filesList,
+                    RecursiveTreeObject::getChildren
+            ));
         }
         allFileTableView.setShowRoot(false);
         addSelectedItemListener();
         searchField.textProperty().addListener(setupSearchField(allFileTableView));
     }
 
-    //TODO: just for prototyping
+
     private void addSelectedItemListener() {
         allFileTableView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSelection, newSelection) -> {
-                    int test = ThreadLocalRandom.current().nextInt(0, 100);
-                    sizeLabel.setText("size" + test);
-                    typeLabel.setText("type" + test);
-                    tagLabel.setText("tag" + test);
-                    commentLabel.setText("comment" + test);
+                    if (newSelection != null) {
+                        File selectedFile = newSelection.getValue();
+                        sizeLabel.setText(SizeConverter.getReadableFileSize(selectedFile.getSize()));
+                        typeLabel.setText(selectedFile.getFileType());
+                        tagLabel.setText(selectedFile.getTag());
+                        commentLabel.setText(selectedFile.getComment());
+                    }
                 });
     }
 
@@ -103,17 +129,20 @@ public class AllFilesController implements Initializable {
                 tableView.setPredicate(fileProp -> {
                     final File file = fileProp.getValue();
                     return file.getName().contains(newVal)
-                            || file.getPath().contains(newVal);
+                            || file.getPath().contains(newVal)
+                            || file.getComment().contains(newVal);
                 });
     }
 
+    //TODO: handle unrecognized files type
     public void addFileButtonOnAction() {
-        java.io.File selectedFile = fileChooser.showOpenDialog(null);
+        java.io.File selectedFile = fileChooser.choseFile();
         try {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
                 String fileName = selectedFile.getName();
-                File newFile = new File(fileName, path);
+                File newFile = new File(fileName, path, selectedFile.length(),
+                        Files.probeContentType(selectedFile.toPath()));
                 fileManager.addFile(
                         newFile,
                         FSDirectory.open(Paths.get(Const.pathIndex))
@@ -129,13 +158,39 @@ public class AllFilesController implements Initializable {
         }
     }
 
-    private FileChooser setupFileChooser() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose file");
-        fileChooser.setInitialDirectory(new java.io.File(System.getProperty("user.home")));
-        return fileChooser;
+    public void addCommentButtonOnAction() {
+        textArea.clear();
+        inputDialog.setTitle("Comment section");
+        inputDialog.showAndWait();
+        String result = textArea.getText();
+        File file = allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+            fileManager.updateFile(file.withComment(result), dir);
+        } catch (IOException e) {
+            log.error(e);
+        }
+        commentLabel.setText(result);
     }
 
+    public void addTagButtonOnAction() {
+        textArea.clear(); // oh is total workaround, but i don't know any better approach for this
+        inputDialog.setTitle("Tag section");
+        inputDialog.showAndWait();
+        String result = textArea.getText();
+        File file = allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+            fileManager.updateFile(file.withTag(result), dir);
+        } catch (IOException e) {
+            log.error(e);
+        }
+        tagLabel.setText(result);
+    }
 }
 
 

@@ -1,23 +1,31 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 //TODO: store information about file type and size
-public class File extends RecursiveTreeObject<File>{
+public class File extends RecursiveTreeObject<File> {
 
     /* In tag and comment getters, setters fields are checked if they are not null,
      because those fields are not initialized on object init */
 
     private StringProperty name;
     private StringProperty path;
+    private LongProperty size;
+    private StringProperty fileType;
     private StringProperty comment;
     private StringProperty tag;
 
-    public File(String name, String path) {
+    public File(String name, String path, Long size, String fileType) {
         this.name = new SimpleStringProperty(name);
         this.path = new SimpleStringProperty(path);
+        this.size = new SimpleLongProperty(size);
+        this.fileType = new SimpleStringProperty(fileType);
+        this.comment = new SimpleStringProperty("");
+        this.tag = new SimpleStringProperty("");
     }
 
     public File withComment(String comment) {
@@ -52,6 +60,14 @@ public class File extends RecursiveTreeObject<File>{
 
     public void setPath(String path) {
         this.path.set(path);
+    }
+
+    public Long getSize() {
+        return size.get();
+    }
+
+    public String getFileType() {
+        return fileType.get();
     }
 
     public String getComment() {

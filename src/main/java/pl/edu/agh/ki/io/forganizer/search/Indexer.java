@@ -46,14 +46,14 @@ public class Indexer {
 
     public void removeDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
-        Term[] terms = {new Term(Const.pathFileProperty, doc.get(Const.pathFileProperty))};
+        Term[] terms = {new Term(Const.filePathProperty, doc.get(Const.filePathProperty))};
         indexWriter.deleteDocuments(terms);
         indexWriter.close();
     }
 
     public void updateDoc(Document doc, Directory dir) throws IOException {
         IndexWriter indexWriter = prepareIndexWriter(dir);
-        Term term = new Term(Const.pathFileProperty, doc.get(Const.pathFileProperty));
+        Term term = new Term(Const.filePathProperty, doc.get(Const.filePathProperty));
         indexWriter.updateDocument(term, doc);
         indexWriter.close();
     }
