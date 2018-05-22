@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -67,7 +68,7 @@ public class AllFilesController implements Initializable {
         log.info("AllFile Controller initialized");
     }
 
-    private void setupInputDialog(){
+    private void setupInputDialog() {
         inputDialog.setHeaderText("Input data in box below");
         inputDialog.setGraphic(null);
         inputDialog.setResizable(true);
@@ -158,33 +159,37 @@ public class AllFilesController implements Initializable {
     }
 
     public void addCommentButtonOnAction() {
+        textArea.clear();
         inputDialog.setTitle("Comment section");
-        Optional<String> result = inputDialog.showAndWait();
+        inputDialog.showAndWait();
+        String result = textArea.getText();
         File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
                 .getValue();
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-            fileManager.updateFile(file.withComment(result.orElse(null)), dir);
+            fileManager.updateFile(file.withComment(result), dir);
         } catch (IOException e) {
             log.error(e);
         }
-        commentLabel.setText(result.orElse(null));
+        commentLabel.setText(result);
     }
 
     public void addTagButtonOnAction() {
+        textArea.clear(); // oh is total workaround, but i don't know any better approach for this
         inputDialog.setTitle("Tag section");
-        Optional<String> result = inputDialog.showAndWait();
+        inputDialog.showAndWait();
+        String result = textArea.getText();
         File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
                 .getValue();
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-            fileManager.updateFile(file.withTag(result.orElse(null)), dir);
+            fileManager.updateFile(file.withTag(result), dir);
         } catch (IOException e) {
             log.error(e);
         }
-        tagLabel.setText(result.orElse(null));
+        tagLabel.setText(result);
     }
 }
 
