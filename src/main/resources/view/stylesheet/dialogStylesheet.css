@@ -1,0 +1,9 @@
+.dialog-pane {
+    -fx-padding: 10 15 10 15;
+}
+.dialog-pane:header .header-panel .label {
+    -fx-alignment: center;
+    -fx-font-family: "Century Gothic";
+    -fx-font-size: 1.5em;
+    -fx-text-alignment: center;
+}

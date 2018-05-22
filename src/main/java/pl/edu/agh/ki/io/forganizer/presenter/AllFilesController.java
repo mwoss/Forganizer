@@ -7,13 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.TreeTableColumn;
-import javafx.stage.FileChooser;
+import javafx.scene.control.*;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.omg.PortableInterceptor.INACTIVE;
 import pl.edu.agh.ki.io.forganizer.model.File;
 import pl.edu.agh.ki.io.forganizer.model.FileManager;
 import pl.edu.agh.ki.io.forganizer.search.Language;
@@ -39,6 +37,9 @@ public class AllFilesController implements Initializable {
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
 
+    private TextInputDialog inputDialog;
+    private TextArea textArea;
+
     @FXML
     private JFXTreeTableView<File> allFileTableView;
     @FXML
@@ -59,9 +60,24 @@ public class AllFilesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.fileChooser = new FileLoader();
+        this.inputDialog = new TextInputDialog("");
+        this.textArea = new TextArea();
         setupTableView();
+        setupInputDialog();
         log.info("AllFile Controller initialized");
     }
+
+    private void setupInputDialog(){
+        inputDialog.setHeaderText("Input data in box below");
+        inputDialog.setGraphic(null);
+        inputDialog.setResizable(true);
+        inputDialog.getDialogPane().getStylesheets().add(
+                getClass().getResource("/view/stylesheet/dialogStylesheet.css").toExternalForm()
+        );
+        this.textArea.setWrapText(true);
+        inputDialog.getDialogPane().setContent(textArea);
+    }
+
 
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
@@ -142,9 +158,8 @@ public class AllFilesController implements Initializable {
     }
 
     public void addCommentButtonOnAction() {
-        TextInputDialog dialog = new TextInputDialog("");
-        dialog.setTitle("Comment section");
-        Optional<String> result = dialog.showAndWait();
+        inputDialog.setTitle("Comment section");
+        Optional<String> result = inputDialog.showAndWait();
         File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
@@ -158,9 +173,8 @@ public class AllFilesController implements Initializable {
     }
 
     public void addTagButtonOnAction() {
-        TextInputDialog dialog = new TextInputDialog("");
-        dialog.setTitle("Tag section");
-        Optional<String> result = dialog.showAndWait();
+        inputDialog.setTitle("Tag section");
+        Optional<String> result = inputDialog.showAndWait();
         File file = allFileTableView.getSelectionModel()
                 .selectedItemProperty()
                 .get()
