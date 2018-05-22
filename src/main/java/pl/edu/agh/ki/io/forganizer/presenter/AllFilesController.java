@@ -19,6 +19,7 @@ import pl.edu.agh.ki.io.forganizer.model.FileManager;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 import javafx.beans.value.ChangeListener;
+import pl.edu.agh.ki.io.forganizer.utils.FileLoader;
 import pl.edu.agh.ki.io.forganizer.utils.SizeConverter;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ import java.util.function.Function;
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
-    private FileChooser fileChooser;
+    private FileLoader fileChooser;
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
 
@@ -57,7 +58,7 @@ public class AllFilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.fileChooser = setupFileChooser();
+        this.fileChooser = new FileLoader();
         setupTableView();
         log.info("AllFile Controller initialized");
     }
@@ -81,7 +82,6 @@ public class AllFilesController implements Initializable {
         searchField.textProperty().addListener(setupSearchField(allFileTableView));
     }
 
-    //TODO: just for prototyping
 
     private void addSelectedItemListener() {
         allFileTableView.getSelectionModel().selectedItemProperty()
@@ -114,13 +114,12 @@ public class AllFilesController implements Initializable {
                     return file.getName().contains(newVal)
                             || file.getPath().contains(newVal)
                             || file.getComment().contains(newVal);
-
                 });
     }
 
     //TODO: handle unrecognized files type
     public void addFileButtonOnAction() {
-        java.io.File selectedFile = fileChooser.showOpenDialog(null);
+        java.io.File selectedFile = fileChooser.choseFile();
         try {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
@@ -173,16 +172,6 @@ public class AllFilesController implements Initializable {
         }
         tagLabel.setText(result.orElse(null));
     }
-
-    //TODO: consider moving FileChose to separate class
-    //TODO: enable adding few files in the same time
-    private FileChooser setupFileChooser() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose file");
-        fileChooser.setInitialDirectory(new java.io.File(System.getProperty("user.home")));
-        return fileChooser;
-    }
-
 }
 
 
