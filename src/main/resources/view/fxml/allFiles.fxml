@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -113,11 +114,14 @@
             </JFXButton>
         </children>
     </AnchorPane>
-    <JFXTreeTableView fx:id="allFileTableView" layoutX="343.0" layoutY="135.0" prefHeight="305.0" prefWidth="283.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="134.0">
+    <JFXTreeTableView fx:id="allFileTableView" layoutX="343.0" layoutY="135.0" prefHeight="305.0" prefWidth="283.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="134.0">
         <columns>
             <JFXTreeTableColumn fx:id="fileNameColumn" prefWidth="160.0" styleClass="table-column" text="File name" />
             <JFXTreeTableColumn fx:id="filePathColumn" prefWidth="160.0" styleClass="table-column" text="File path" />
         </columns>
+      <columnResizePolicy>
+         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
     </JFXTreeTableView>
     <JFXTextField fx:id="searchField" alignment="CENTER" layoutX="340.0" layoutY="94.0" prefHeight="25.0" prefWidth="283.0" promptText="Search files" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50">
         <font>
