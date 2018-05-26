@@ -2,13 +2,16 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -96,7 +99,39 @@ public class AllFilesController implements Initializable {
         }
         allFileTableView.setShowRoot(false);
         addSelectedItemListener();
+        contexMenuListener();
         searchField.textProperty().addListener(setupSearchField(allFileTableView));
+    }
+
+    private void contexMenuListener(){
+//        allFileTableView.setRowFactory(
+//                new Callback<TreeTableView<File>, TreeTableRow<File>>() {
+//                    @Override
+//                    public TreeTableRow<File> call(TreeTableView<File> param) {
+//                        final TreeTableRow<File> row = new TreeTableRow<>();
+//                        final ContextMenu rowMenu = new ContextMenu();
+//                        MenuItem editItem = new MenuItem("Edit");
+//                        MenuItem removeItem = new MenuItem("Remove");
+//                        removeItem.setOnAction(new EventHandler<ActionEvent>() {
+//                            @Override
+//                            public void handle(ActionEvent event) {
+//                                System.out.println("remove");
+//                            }
+//                        });
+//                        rowMenu.getItems().addAll(editItem, removeItem);
+//                        return row;
+//                    }
+//                }
+//        );
+        MenuItem menuItem = new MenuItem("Remove");
+        menuItem.setOnAction((ActionEvent event) -> {
+            System.out.println("remove item");
+            Object item = allFileTableView.getSelectionModel().getSelectedItem();
+            System.out.println("Selected item: " + item);
+        });
+        ContextMenu menu = new ContextMenu();
+        menu.getItems().add(menuItem);
+        allFileTableView.setContextMenu(menu);
     }
 
 
