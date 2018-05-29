@@ -95,7 +95,7 @@
          <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
     </JFXTreeTableView>
-    <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="#5a0026" layoutX="73.0" layoutY="94.0" prefHeight="30.0" prefWidth="287.0" promptText="Search files" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="360.0">
+    <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="#5a0026" layoutX="73.0" layoutY="94.0" prefHeight="30.0" prefWidth="287.0" promptText="Search files" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="360.0">
         <font>
             <Font size="14.0" />
         </font>
