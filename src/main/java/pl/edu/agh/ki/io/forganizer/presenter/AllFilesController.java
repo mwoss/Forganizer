@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -37,6 +38,7 @@ public class AllFilesController implements Initializable {
     private ObservableList<File> filesList;
 
     private TextInputDialog inputDialog;
+    private Alert confirmationDialog;
     private TextArea textArea;
 
     @FXML
@@ -60,9 +62,11 @@ public class AllFilesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.fileChooser = new FileLoader();
         this.inputDialog = new TextInputDialog("");
+        this.confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         this.textArea = new TextArea();
         setupTableView();
         setupInputDialog();
+        setupConfirmationDialog();
         log.info("AllFile Controller initialized");
     }
 
@@ -75,6 +79,10 @@ public class AllFilesController implements Initializable {
         );
         this.textArea.setWrapText(true);
         inputDialog.getDialogPane().setContent(textArea);
+    }
+
+    private void setupConfirmationDialog(){
+        confirmationDialog.setHeaderText("Are you sure want to delete this file?");
     }
 
 
@@ -208,15 +216,18 @@ public class AllFilesController implements Initializable {
     private MenuItem newRemoveContextItem() {
         MenuItem removeItem = new MenuItem("Remove");
         removeItem.setOnAction((ActionEvent event) -> {
-            File file = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue();
-            try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                fileManager.removeFile(file, dir);
-                filesList.removeAll(file);
-            } catch (IOException e) {
-                log.error(e);
+            Optional<ButtonType> result = confirmationDialog.showAndWait();
+            if (result.get() == ButtonType.OK){
+                File file = allFileTableView.getSelectionModel()
+                        .selectedItemProperty()
+                        .get()
+                        .getValue();
+                try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                    fileManager.removeFile(file, dir);
+                    filesList.removeAll(file);
+                } catch (IOException e) {
+                    log.error(e);
+                }
             }
         });
         return removeItem;
