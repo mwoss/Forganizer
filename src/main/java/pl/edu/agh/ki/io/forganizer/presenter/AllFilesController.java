@@ -27,8 +27,8 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-//TODO: Add this controller to controller map at app start
 //TODO: should be optimized somehow
+//TODO: !! init it only once
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
@@ -99,25 +99,6 @@ public class AllFilesController implements Initializable {
     }
 
     private void contexMenuListener(){
-//        allFileTableView.setRowFactory(
-//                new Callback<TreeTableView<File>, TreeTableRow<File>>() {
-//                    @Override
-//                    public TreeTableRow<File> call(TreeTableView<File> param) {
-//                        final TreeTableRow<File> row = new TreeTableRow<>();
-//                        final ContextMenu rowMenu = new ContextMenu();
-//                        MenuItem editItem = new MenuItem("Edit");
-//                        MenuItem removeItem = new MenuItem("Remove");
-//                        removeItem.setOnAction(new EventHandler<ActionEvent>() {
-//                            @Override
-//                            public void handle(ActionEvent event) {
-//                                System.out.println("remove");
-//                            }
-//                        });
-//                        rowMenu.getItems().addAll(editItem, removeItem);
-//                        return row;
-//                    }
-//                }
-//        );
         MenuItem menuItem = new MenuItem("Remove");
         menuItem.setOnAction((ActionEvent event) -> {
             System.out.println("remove item");
@@ -125,7 +106,7 @@ public class AllFilesController implements Initializable {
             System.out.println("Selected item: " + item);
         });
         ContextMenu menu = new ContextMenu();
-        menu.getItems().add(menuItem);
+        menu.getItems().addAll(menuItem, newAddCommentContextItem(), newAddTagContextItem());
         allFileTableView.setContextMenu(menu);
     }
 
@@ -188,38 +169,46 @@ public class AllFilesController implements Initializable {
         }
     }
 
-    public void addCommentButtonOnAction() {
-        textArea.clear();
-        inputDialog.setTitle("Comment section");
-        inputDialog.showAndWait();
-        String result = textArea.getText();
-        File file = allFileTableView.getSelectionModel()
-                .selectedItemProperty()
-                .get()
-                .getValue();
-        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-            fileManager.updateFile(file.withComment(result), dir);
-        } catch (IOException e) {
-            log.error(e);
-        }
-        commentLabel.setText(result);
+    public MenuItem newAddCommentContextItem() {
+        MenuItem addCommentItem = new MenuItem("Add comment");
+        addCommentItem.setOnAction((ActionEvent event) -> {
+            textArea.clear();
+            inputDialog.setTitle("Comment section");
+            inputDialog.showAndWait();
+            String result = textArea.getText();
+            File file = allFileTableView.getSelectionModel()
+                    .selectedItemProperty()
+                    .get()
+                    .getValue();
+            try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                fileManager.updateFile(file.withComment(result), dir);
+            } catch (IOException e) {
+                log.error(e);
+            }
+            commentLabel.setText(result);
+        });
+        return addCommentItem;
     }
 
-    public void addTagButtonOnAction() {
-        textArea.clear(); // oh is total workaround, but i don't know any better approach for this
-        inputDialog.setTitle("Tag section");
-        inputDialog.showAndWait();
-        String result = textArea.getText();
-        File file = allFileTableView.getSelectionModel()
-                .selectedItemProperty()
-                .get()
-                .getValue();
-        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-            fileManager.updateFile(file.withTag(result), dir);
-        } catch (IOException e) {
-            log.error(e);
-        }
-        tagLabel.setText(result);
+    public MenuItem newAddTagContextItem() {
+        MenuItem addTagItem = new MenuItem("Add tag");
+        addTagItem.setOnAction((ActionEvent event) -> {
+            textArea.clear(); // oh is total workaround, but i don't know any better approach for this
+            inputDialog.setTitle("Tag section");
+            inputDialog.showAndWait();
+            String result = textArea.getText();
+            File file = allFileTableView.getSelectionModel()
+                    .selectedItemProperty()
+                    .get()
+                    .getValue();
+            try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                fileManager.updateFile(file.withTag(result), dir);
+            } catch (IOException e) {
+                log.error(e);
+            }
+            tagLabel.setText(result);
+        });
+        return addTagItem;
     }
 }
 

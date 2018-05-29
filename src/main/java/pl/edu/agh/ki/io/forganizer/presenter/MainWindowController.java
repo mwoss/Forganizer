@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class MainWindowController implements Initializable{
+public class MainWindowController implements Initializable {
 
     private final Logger log = Logger.getLogger(MainWindowController.class);
     private final Map<String, Node> controllerMap = new HashMap<>();
@@ -30,6 +30,12 @@ public class MainWindowController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            Node allFileViewNode = new FXMLLoader(getClass().getResource("/view/fxml/" + Const.allFilesItemID + ".fxml")).load();
+            controllerMap.put(Const.allFilesItemID, allFileViewNode);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
         log.info("MainWindow Controller initialized");
     }
 
@@ -38,11 +44,11 @@ public class MainWindowController implements Initializable{
         try {
             String menuItemID = ((JFXButton) event.getSource()).getId();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/" + menuItemID + ".fxml"));
-            if (controllerMap.get(menuItemID) == null){
+            if (controllerMap.get(menuItemID) == null) {
                 Node view = loader.load();
                 controllerMap.put(menuItemID, view);
                 mainView.setCenter(view);
-            } else{
+            } else {
                 mainView.setCenter(controllerMap.get(menuItemID));
             }
             log.info("Loaded " + menuItemID + " view");
