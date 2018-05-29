@@ -94,19 +94,13 @@ public class AllFilesController implements Initializable {
         }
         allFileTableView.setShowRoot(false);
         addSelectedItemListener();
-        contexMenuListener();
+        contextMenuListener();
         searchField.textProperty().addListener(setupSearchField(allFileTableView));
     }
 
-    private void contexMenuListener(){
-        MenuItem menuItem = new MenuItem("Remove");
-        menuItem.setOnAction((ActionEvent event) -> {
-            System.out.println("remove item");
-            Object item = allFileTableView.getSelectionModel().getSelectedItem();
-            System.out.println("Selected item: " + item);
-        });
+    private void contextMenuListener() {
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(menuItem, newAddCommentContextItem(), newAddTagContextItem());
+        menu.getItems().addAll(newAddCommentContextItem(), newAddTagContextItem(), newRemoveContextItem());
         allFileTableView.setContextMenu(menu);
     }
 
@@ -169,7 +163,7 @@ public class AllFilesController implements Initializable {
         }
     }
 
-    public MenuItem newAddCommentContextItem() {
+    private MenuItem newAddCommentContextItem() {
         MenuItem addCommentItem = new MenuItem("Add comment");
         addCommentItem.setOnAction((ActionEvent event) -> {
             textArea.clear();
@@ -190,7 +184,7 @@ public class AllFilesController implements Initializable {
         return addCommentItem;
     }
 
-    public MenuItem newAddTagContextItem() {
+    private MenuItem newAddTagContextItem() {
         MenuItem addTagItem = new MenuItem("Add tag");
         addTagItem.setOnAction((ActionEvent event) -> {
             textArea.clear(); // oh is total workaround, but i don't know any better approach for this
@@ -209,6 +203,23 @@ public class AllFilesController implements Initializable {
             tagLabel.setText(result);
         });
         return addTagItem;
+    }
+
+    private MenuItem newRemoveContextItem() {
+        MenuItem removeItem = new MenuItem("Remove");
+        removeItem.setOnAction((ActionEvent event) -> {
+            File file = allFileTableView.getSelectionModel()
+                    .selectedItemProperty()
+                    .get()
+                    .getValue();
+            try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                fileManager.removeFile(file, dir);
+                filesList.removeAll(file);
+            } catch (IOException e) {
+                log.error(e);
+            }
+        });
+        return removeItem;
     }
 }
 
