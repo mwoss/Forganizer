@@ -9,6 +9,7 @@
 
 .hbox-style{
     -fx-spacing: 5;
+    -fx-padding: 0 0 0 5;
 }
 
 .header{

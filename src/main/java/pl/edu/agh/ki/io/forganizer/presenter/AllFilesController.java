@@ -2,20 +2,16 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.omg.PortableInterceptor.INACTIVE;
 import pl.edu.agh.ki.io.forganizer.model.File;
 import pl.edu.agh.ki.io.forganizer.model.FileManager;
 import pl.edu.agh.ki.io.forganizer.search.Language;
@@ -28,7 +24,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
