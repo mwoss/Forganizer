@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="521.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.TagController"
-            stylesheets="@../stylesheet/mainStylesheet.css">
+<AnchorPane prefHeight="521.0" prefWidth="705.0" stylesheets="@../stylesheet/mainStylesheet.css"
+            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.edu.agh.ki.io.forganizer.presenter.TagController">
     <children>
         <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="22.0" layoutY="10.0" text="TAGS" styleClass="header">
+                <Label layoutX="22.0" layoutY="10.0" styleClass="header" text="TAGS">
                     <font>
                         <Font name="Century Gothic Bold" size="25.0"/>
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <JFXTreeTableView layoutX="49.0" layoutY="172.0" prefHeight="307.0" prefWidth="608.0"
-                          AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50.0"
-                          AnchorPane.topAnchor="170.0"/>
-        <JFXTextField alignment="CENTER" layoutX="384.0" layoutY="127.0" prefHeight="25.0" prefWidth="273.0"
-                      promptText="Search by tag" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="50">
+        <JFXTreeTableView layoutX="242.0" layoutY="172.0" prefHeight="301.0" prefWidth="413.0"
+                          AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="50.0"
+                          AnchorPane.topAnchor="170.0" fx:id="tagFileTable">
+            <columns>
+                <JFXTreeTableColumn fx:id="tagFileNameColumn" prefWidth="206.0" styleClass="table-column" text="File name"/>
+                <JFXTreeTableColumn fx:id="tagFilePathColumn" prefWidth="206.0" styleClass="table-column" text="File path"/>
+            </columns>
+        </JFXTreeTableView>
+        <JFXTextField alignment="CENTER" layoutX="242.0" layoutY="126.0" prefHeight="29.0" prefWidth="294.0"
+                      promptText="Search by tag" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="169.0">
             <font>
                 <Font size="15.0"/>
             </font>
         </JFXTextField>
-        <JFXRadioButton layoutX="49.0" layoutY="143.0" mnemonicParsing="false" text="Action1">
-            <font>
-                <Font size="13.0"/>
-            </font>
-        </JFXRadioButton>
-        <JFXRadioButton layoutX="157.0" layoutY="143.0" mnemonicParsing="false" text="Action2">
-            <font>
-                <Font size="13.0"/>
-            </font>
-        </JFXRadioButton>
+        <AnchorPane layoutX="21.0" layoutY="70.0" prefHeight="400.0" prefWidth="195.0">
+            <children>
+                <JFXTreeTableView fx:id="tagTable" layoutY="100.0" prefHeight="301.0" prefWidth="195.0">
+                    <columns>
+                        <JFXTreeTableColumn fx:id="tagColumn" prefWidth="193.0" styleClass="table-column" text="Tags"/>
+                    </columns>
+                </JFXTreeTableView>
+                <JFXTextField alignment="CENTER" layoutX="9.0" layoutY="58.0" promptText="search Tag">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </JFXTextField>
+            </children>
+        </AnchorPane>
     </children>
 
 </AnchorPane>
