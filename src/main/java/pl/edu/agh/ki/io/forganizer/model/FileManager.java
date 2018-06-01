@@ -2,10 +2,12 @@ package pl.edu.agh.ki.io.forganizer.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.store.Directory;
 import pl.edu.agh.ki.io.forganizer.search.Indexer;
 import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.search.Searcher;
+import pl.edu.agh.ki.io.forganizer.utils.Const;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -39,6 +41,12 @@ public class FileManager {
 
     public ObservableList<File> getAllFiles(Directory dir) throws IOException {
         return Arrays.stream(searcher.getAllDocs(dir))
+                .map(converter::convertDocToFile)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    public ObservableList<File> getAllFilesByTag(String tag, Directory dir) throws IOException, ParseException {
+        return Arrays.stream(searcher.searchField(Const.tagFileProperty, tag, dir, Searcher.MAX_DOC))
                 .map(converter::convertDocToFile)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
