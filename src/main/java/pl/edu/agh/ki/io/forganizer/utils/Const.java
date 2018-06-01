@@ -26,6 +26,9 @@ public final class Const {
     /* File comment property */
     public static final String commentFileProperty = "comment";
 
+    /* All files view ID in side menu */
+    public static final String allFilesItemID = "allFiles";
+
     private Const(){
         throw new AssertionError();
     }
