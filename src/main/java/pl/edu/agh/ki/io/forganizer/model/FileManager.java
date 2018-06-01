@@ -45,8 +45,14 @@ public class FileManager {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
-    public ObservableList<File> getAllFilesByTag(String tag, Directory dir) throws IOException, ParseException {
+    public ObservableList<File> getFilesByTag(String tag, Directory dir) throws IOException, ParseException {
         return Arrays.stream(searcher.searchField(Const.tagFileProperty, tag, dir, Searcher.MAX_DOC))
+                .map(converter::convertDocToFile)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    public ObservableList<File> getFilesWithNonEmptyTag(Directory dir) throws IOException, ParseException {
+        return Arrays.stream(searcher.searchField(Const.tagFileProperty, "/.+/", dir, Searcher.MAX_DOC))
                 .map(converter::convertDocToFile)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
