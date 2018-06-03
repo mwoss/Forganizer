@@ -154,8 +154,9 @@ public class AllFilesController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getAbsolutePath();
                 String fileName = selectedFile.getName();
+                String fileType = Files.probeContentType(selectedFile.toPath());
                 File newFile = new File(fileName, path, selectedFile.length(),
-                        Files.probeContentType(selectedFile.toPath()));
+                        fileType != null ? fileType : "undefined");
                 fileManager.addFile(
                         newFile,
                         FSDirectory.open(Paths.get(Const.pathIndex))
