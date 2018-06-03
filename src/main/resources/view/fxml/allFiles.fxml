@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,75 +12,75 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="720.0" stylesheets="@../stylesheet/mainStylesheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.AllFilesController">
+<AnchorPane prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.ki.io.forganizer.presenter.AllFilesController">
     <AnchorPane prefHeight="52.0" prefWidth="720.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <children>
-            <Label layoutX="22.0" layoutY="10.0" styleClass="header" text="ALL FILES">
+            <Label layoutX="22.0" layoutY="10.0" styleClass="header, window-title" text="ALL FILES">
                 <font>
-                    <Font name="Century Gothic Bold" size="25.0" />
+                    <Font name="Century Gothic Bold"/>
                 </font>
             </Label>
         </children>
     </AnchorPane>
       <VBox prefHeight="202.0" prefWidth="632.0" styleClass="vbox-style" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
           <children>
-              <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:">
+              <Label prefHeight="28.0" prefWidth="161.0" text="Selected File:" styleClass="file-desc-title">
                   <font>
-                      <Font name="Century Gothic Bold" size="20.0" />
+                      <Font name="Century Gothic Bold"/>
                   </font>
               </Label>
          <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
             <children>
-                    <Label text="Size:">
+                    <Label text="Size:" styleClass="file-desc">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
+                            <Font name="Century Gothic" />
                         </font>
                     </Label>
-               <Label fx:id="sizeLabel">
+               <Label fx:id="sizeLabel" styleClass="file-desc">
                   <font>
-                     <Font name="Century Gothic" size="15.0" />
+                     <Font name="Century Gothic" />
                   </font>
                </Label>
             </children>
          </HBox>
          <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
             <children>
-                    <Label text="File Type:">
+                    <Label text="File Type:" styleClass="file-desc">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
+                            <Font name="Century Gothic" />
                         </font>
                     </Label>
-               <Label fx:id="typeLabel">
+               <Label fx:id="typeLabel" styleClass="file-desc">
                   <font>
-                     <Font name="Century Gothic" size="15.0" />
+                     <Font name="Century Gothic" />
                   </font>
                </Label>
             </children>
          </HBox>
          <HBox prefHeight="30.0" prefWidth="256.0" styleClass="hbox-style">
             <children>
-                    <Label text="Tags:">
+                    <Label text="Tags:" styleClass="file-desc">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
+                            <Font name="Century Gothic" />
                         </font>
                     </Label>
-               <Label fx:id="tagLabel">
+               <Label fx:id="tagLabel" styleClass="file-desc">
                   <font>
-                     <Font name="Century Gothic" size="15.0" />
+                     <Font name="Century Gothic" />
                   </font>
                </Label>
             </children>
          </HBox>
          <HBox prefHeight="48.0" prefWidth="649.0" styleClass="hbox-style">
             <children>
-                    <Label text="Comment:">
+                    <Label text="Comment:" styleClass="file-desc">
                         <font>
-                            <Font name="Century Gothic" size="15.0" />
+                            <Font name="Century Gothic" />
                         </font>
                     </Label>
-               <Label fx:id="commentLabel">
+               <Label fx:id="commentLabel" styleClass="file-desc">
                   <font>
-                     <Font name="Century Gothic" size="15.0" />
+                     <Font name="Century Gothic"/>
                   </font>
                </Label>
             </children>
@@ -88,16 +89,16 @@
       </VBox>
     <JFXTreeTableView fx:id="allFileTableView" layoutX="73.0" layoutY="135.0" prefHeight="245.0" prefWidth="632.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="135.0">
         <columns>
-            <JFXTreeTableColumn fx:id="fileNameColumn" prefWidth="160.0" styleClass="table-column" text="File name" />
-            <JFXTreeTableColumn fx:id="filePathColumn" prefWidth="160.0" styleClass="table-column" text="File path" />
+            <JFXTreeTableColumn fx:id="fileNameColumn" prefWidth="160.0" styleClass="table-column, table-data" text="File name" />
+            <JFXTreeTableColumn fx:id="filePathColumn" prefWidth="160.0" styleClass="table-column, table-data" text="File path" />
         </columns>
       <columnResizePolicy>
          <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
     </JFXTreeTableView>
-    <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="#5a0026" layoutX="73.0" layoutY="94.0" prefHeight="30.0" prefWidth="287.0" promptText="Search files" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="360.0">
+    <JFXTextField fx:id="searchField" alignment="CENTER" styleClass="search-field" focusColor="#5a0026" layoutX="73.0" layoutY="94.0" prefHeight="30.0" prefWidth="287.0" promptText="Search files" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="360.0">
         <font>
-            <Font size="14.0" />
+            <Font />
         </font>
     </JFXTextField>
       <JFXButton fx:id="addFileButton" layoutY="98.0" mnemonicParsing="false" onAction="#addFileButtonOnAction" prefHeight="28.0" prefWidth="198.0" styleClass="button-action" text="Add new file" AnchorPane.rightAnchor="30.0">
@@ -105,4 +106,8 @@
               <Font name="System Bold" size="14.0" />
           </font>
       </JFXButton>
+   <stylesheets>
+      <URL value="@../stylesheet/mainStylesheet.css" />
+      <URL value="@../stylesheet/userStylesheet.css" />
+   </stylesheets>
 </AnchorPane>
