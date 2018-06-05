@@ -9,6 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -18,8 +21,10 @@ import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 import javafx.beans.value.ChangeListener;
 import pl.edu.agh.ki.io.forganizer.utils.FileLoader;
+import pl.edu.agh.ki.io.forganizer.utils.PathConverter;
 import pl.edu.agh.ki.io.forganizer.utils.SizeConverter;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -108,7 +113,8 @@ public class AllFilesController implements Initializable {
 
     private void contextMenuListener() {
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(newAddCommentContextItem(), newAddTagContextItem(), newRemoveContextItem());
+        menu.getItems().addAll(newAddCommentContextItem(), newAddTagContextItem(),
+                removeContextItem(), showInExplorerContextItem());
         allFileTableView.setContextMenu(menu);
     }
 
@@ -213,7 +219,7 @@ public class AllFilesController implements Initializable {
         return addTagItem;
     }
 
-    private MenuItem newRemoveContextItem() {
+    private MenuItem removeContextItem() {
         MenuItem removeItem = new MenuItem("Remove");
         removeItem.setOnAction((ActionEvent event) -> {
             Optional<ButtonType> result = confirmationDialog.showAndWait();
@@ -231,6 +237,24 @@ public class AllFilesController implements Initializable {
             }
         });
         return removeItem;
+    }
+
+    //TODO: When file deleted or just track when file is deleted or sth
+    private MenuItem showInExplorerContextItem() {
+        MenuItem addCommentItem = new MenuItem("Show in explorer");
+        addCommentItem.setOnAction((ActionEvent event) -> {
+            String path = allFileTableView.getSelectionModel()
+                    .selectedItemProperty()
+                    .get()
+                    .getValue()
+                    .getPath();
+            try {
+                Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(path)));
+            } catch (IOException | IllegalArgumentException e) {
+                log.error("Couldn't open directory");
+            }
+        });
+        return addCommentItem;
     }
 }
 
