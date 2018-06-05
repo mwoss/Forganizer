@@ -6,6 +6,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,8 +23,12 @@ import pl.edu.agh.ki.io.forganizer.utils.Const;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class TagController implements Initializable {
@@ -60,7 +65,11 @@ public class TagController implements Initializable {
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
 
             tagList = fileManager.getAllFiles(dir);
-            tagList.filtered(file -> !file.getTag().isEmpty());
+            tagList = tagList
+                    .stream()
+                    .filter(file -> !file.getTag().equals(""))
+                    .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
+
         } catch (IOException e) {
             tagList = FXCollections.observableArrayList();
             log.error(e.getMessage());
