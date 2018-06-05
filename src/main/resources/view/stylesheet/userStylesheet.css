@@ -1,0 +1,23 @@
+.file-desc-title {
+    -fx-font-size: 20;
+}
+
+.file-desc {
+    -fx-font-size: 15;
+}
+
+.table-data {
+ -fx-font-size: 15;
+}
+
+.table-col-titles {
+
+}
+
+.search-field {
+    -fx-font-size: 14;
+}
+
+.window-title {
+    -fx-font-size: 25;
+}
