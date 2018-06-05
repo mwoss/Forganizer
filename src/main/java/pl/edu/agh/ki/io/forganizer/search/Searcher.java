@@ -6,6 +6,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
@@ -19,11 +20,11 @@ import java.nio.file.Paths;
 
 public class Searcher {
 
-    private String indexPath;
     private Analyzer analyzer;
 
+    public static final int MAX_DOC = Integer.MAX_VALUE - 128;
+
     public Searcher(String indexPath, Language language) {
-        this.indexPath = indexPath;
         switch (language) {
             case POLISH:
                 analyzer = new MorfologikAnalyzer();
@@ -37,7 +38,7 @@ public class Searcher {
     public Document[] searchField(String fieldName,
                                   String queryString,
                                   Directory dir,
-                                  int resultsNum) throws Exception {
+                                  int resultsNum) throws IOException, ParseException {
         IndexReader indexReader = DirectoryReader.open(dir);
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
         QueryParser queryParser = new QueryParser(fieldName, analyzer);
