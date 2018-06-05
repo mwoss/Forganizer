@@ -23,12 +23,9 @@ import pl.edu.agh.ki.io.forganizer.utils.Const;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 
 
 public class TagController implements Initializable {
@@ -53,19 +50,15 @@ public class TagController implements Initializable {
     JFXTreeTableColumn<File, String> tagColumn;
 
 
-    public TagController() {
-        log.info("Tag Controller initialized");
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupTagTableView();
+        log.info("Tag Controller initialized");
     }
 
     private void setupTagTableView() {
         setupCellValueFactory(tagColumn, File::getTagProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-
             tagList = fileManager.getFilesWithNonEmptyTag(dir);
         } catch (IOException e) {
             tagList = FXCollections.observableArrayList();
@@ -95,7 +88,7 @@ public class TagController implements Initializable {
                             filesList = FXCollections.observableArrayList();
                             log.error(e.getMessage());
                         } catch (ParseException e) {
-                            e.printStackTrace();
+                            log.error(e.getMessage());
                         } finally {
                             tagFileTable.setRoot(new RecursiveTreeItem<>(
                                     filesList,

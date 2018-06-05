@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,31 +15,30 @@
             <children>
                 <Label layoutX="22.0" layoutY="10.0" styleClass="header, window-title" text="TAGS">
                     <font>
-                        <Font name="Century Gothic Bold"/>
+                        <Font name="Century Gothic Bold" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <JFXTreeTableView fx:id="tagFileTable" layoutX="242.0" layoutY="172.0" prefHeight="301.0" prefWidth="413.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="170.0">
+        <JFXTreeTableView fx:id="tagFileTable" layoutX="242.0" layoutY="172.0" prefHeight="301.0" prefWidth="413.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="135.0">
             <columns>
                 <JFXTreeTableColumn fx:id="tagFileNameColumn" prefWidth="206.0" styleClass="table-column, table-data" text="File name" />
                 <JFXTreeTableColumn fx:id="tagFilePathColumn" prefWidth="206.0" styleClass="table-column, table-data" text="File path" />
             </columns>
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
         </JFXTreeTableView>
-        <AnchorPane layoutX="21.0" layoutY="70.0" prefHeight="400.0" prefWidth="195.0">
-            <children>
-                <JFXTreeTableView fx:id="tagTable" layoutY="100.0" prefHeight="301.0" prefWidth="195.0">
-                    <columns>
-                        <JFXTreeTableColumn fx:id="tagColumn" prefWidth="193.0" styleClass="table-column, table-data" text="Tags" />
-                    </columns>
-                </JFXTreeTableView>
-                <JFXTextField alignment="CENTER" layoutX="9.0" layoutY="58.0" promptText="Search Tags" styleClass="search-field">
-                    <font>
-                        <Font/>
-                    </font>
-                </JFXTextField>
-            </children>
-        </AnchorPane>
+          <JFXTreeTableView fx:id="tagTable" prefHeight="301.0" prefWidth="195.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="135.0">
+              <columns>
+                  <JFXTreeTableColumn fx:id="tagColumn" prefWidth="193.0" styleClass="table-column, table-data" text="Tags" />
+              </columns>
+          </JFXTreeTableView>
+          <JFXTextField alignment="CENTER" layoutY="94" prefHeight="30.0" prefWidth="195.0" promptText="Search Tags" styleClass="search-field" AnchorPane.leftAnchor="30.0">
+              <font>
+                  <Font />
+              </font>
+          </JFXTextField>
     </children>
    <stylesheets>
       <URL value="@../stylesheet/mainStylesheet.css" />

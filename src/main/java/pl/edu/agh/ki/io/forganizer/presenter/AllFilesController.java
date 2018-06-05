@@ -147,7 +147,6 @@ public class AllFilesController implements Initializable {
                 });
     }
 
-    //TODO: handle unrecognized files type
     public void addFileButtonOnAction() {
         java.io.File selectedFile = fileChooser.choseFile();
         try {
