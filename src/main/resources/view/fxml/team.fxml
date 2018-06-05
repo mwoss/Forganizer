@@ -36,7 +36,7 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png"/>
                                     </image>
                                 </ImageView>
                                 <Label text="Yurii Vyzha">
@@ -50,7 +50,7 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-girl.png"/>
+                                        <Image url="@../static/info/person-girl.png"/>
                                     </image>
                                 </ImageView>
                                 <Label text="Anna Marciniec">
@@ -64,7 +64,7 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png"/>
                                     </image>
                                 </ImageView>
                                 <Label text="Mateusz Najdek">
@@ -78,7 +78,7 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png"/>
                                     </image>
                                 </ImageView>
                                 <Label text="Mateusz Woś">

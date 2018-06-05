@@ -33,6 +33,7 @@ public class MainWindowController implements Initializable {
         try {
             Node allFileViewNode = new FXMLLoader(getClass().getResource("/view/fxml/" + Const.allFilesItemID + ".fxml")).load();
             controllerMap.put(Const.allFilesItemID, allFileViewNode);
+            mainView.setCenter(allFileViewNode);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
