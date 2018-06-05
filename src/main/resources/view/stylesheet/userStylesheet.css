@@ -10,10 +10,6 @@
  -fx-font-size: 13;
 }
 
-.table-col-titles {
-
-}
-
 .search-field {
     -fx-font-size: 14;
 }
@@ -21,3 +17,8 @@
 .window-title {
     -fx-font-size: 25;
 }
+
+.info-font-size{
+    -fx-font-size: 14;
+}
+
