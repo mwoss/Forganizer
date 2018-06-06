@@ -70,6 +70,6 @@
         </AnchorPane>
     </left>
     <center>
-        <fx:include source="allFiles.fxml" />
+        <fx:include source="init_helper/blank.fxml" />
     </center>
 </BorderPane>

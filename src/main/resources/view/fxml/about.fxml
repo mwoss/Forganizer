@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,31 +8,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../stylesheet/mainStylesheet.css">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="22.0" layoutY="10.0" text="ABOUT" styleClass="header">
+                <Label layoutX="22.0" layoutY="10.0" styleClass="header, window-title" text="ABOUT">
                     <font>
-                        <Font name="Century Gothic Bold" size="25.0" />
+                        <Font name="Century Gothic Bold"/>
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-      <VBox alignment="TOP_CENTER" layoutX="213.0" layoutY="52.0" prefHeight="348.0" prefWidth="271.0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
+      <VBox alignment="TOP_CENTER" layoutX="213.0" layoutY="52.0" prefHeight="348.0" prefWidth="271.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
          <children>
             <Pane prefHeight="33.0" prefWidth="271.0" />
-            <Label text="Forganizer">
+            <Label text="Forganizer" styleClass="window-title">
                <font>
-                  <Font name="Century Gothic Bold" size="23.0" />
+                  <Font name="Century Gothic Bold"/>
                </font>
             </Label>
-            <Label text="An easy-to-use file organizer" />
-            <Label text=" with convenient searching" />
+            <Label text="An easy-to-use file organizer" styleClass="info-font-size"/>
+            <Label text=" with convenient searching" styleClass="info-font-size"/>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
     </children>
+   <stylesheets>
+      <URL value="@../stylesheet/mainStylesheet.css" />
+      <URL value="@../stylesheet/userStylesheet.css" />
+   </stylesheets>
 </AnchorPane>

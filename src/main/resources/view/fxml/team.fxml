@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,39 +10,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="466.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../stylesheet/mainStylesheet.css">
+<AnchorPane prefHeight="466.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <AnchorPane prefHeight="52.0" prefWidth="705.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="22.0" layoutY="10.0" text="TEAM INFO" styleClass="header">
+                <Label layoutX="22.0" layoutY="10.0" styleClass="header, window-title" text="TEAM INFO">
                     <font>
-                        <Font name="Century Gothic Bold" size="25.0"/>
+                        <Font name="Century Gothic Bold"/>
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="103.0" prefHeight="290.0" prefWidth="679.0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
+        <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="103.0" prefHeight="290.0" prefWidth="679.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <Label text="Team squad info">
+                <Label text="Team squad info" styleClass="window-title">
                     <font>
-                        <Font name="Century Gothic" size="26.0"/>
+                        <Font name="Century Gothic"/>
                     </font>
                 </Label>
-                <Pane prefHeight="56.0" prefWidth="679.0"/>
+                <Pane prefHeight="56.0" prefWidth="679.0" />
                 <HBox alignment="TOP_CENTER" prefHeight="209.0" prefWidth="679.0" spacing="10">
                     <children>
                         <VBox alignment="TOP_CENTER" prefHeight="201.0" prefWidth="150.0" spacing="5">
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png" />
                                     </image>
                                 </ImageView>
-                                <Label text="Yurii Vyzha">
+                                <Label text="Yurii Vyzha" styleClass="info-font-size">
                                     <font>
-                                        <Font name="Century Gothic" size="15.0"/>
+                                        <Font name="Century Gothic"/>
                                     </font>
                                 </Label>
                             </children>
@@ -50,12 +49,12 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-girl.png"/>
+                                        <Image url="@../static/info/person-girl.png" />
                                     </image>
                                 </ImageView>
-                                <Label text="Anna Marciniec">
+                                <Label text="Anna Marciniec" styleClass="info-font-size">
                                     <font>
-                                        <Font name="Century Gothic" size="15.0"/>
+                                        <Font name="Century Gothic"/>
                                     </font>
                                 </Label>
                             </children>
@@ -64,12 +63,12 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png" />
                                     </image>
                                 </ImageView>
-                                <Label text="Mateusz Najdek">
+                                <Label text="Mateusz Najdek" styleClass="info-font-size">
                                     <font>
-                                        <Font name="Century Gothic" size="15.0"/>
+                                        <Font name="Century Gothic"/>
                                     </font>
                                 </Label>
                             </children>
@@ -78,12 +77,12 @@
                             <children>
                                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../static/person-boy.png"/>
+                                        <Image url="@../static/info/person-boy.png" />
                                     </image>
                                 </ImageView>
-                                <Label text="Mateusz Woś">
+                                <Label text="Mateusz Woś" styleClass="info-font-size">
                                     <font>
-                                        <Font name="Century Gothic" size="15.0"/>
+                                        <Font name="Century Gothic"/>
                                     </font>
                                 </Label>
                             </children>
@@ -93,4 +92,8 @@
             </children>
         </VBox>
     </children>
+   <stylesheets>
+      <URL value="@../stylesheet/mainStylesheet.css" />
+      <URL value="@../stylesheet/userStylesheet.css" />
+   </stylesheets>
 </AnchorPane>

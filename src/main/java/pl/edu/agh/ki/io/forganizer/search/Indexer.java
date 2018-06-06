@@ -28,10 +28,6 @@ public class Indexer {
                 break;
         }
     }
-    // TODO
-    // dir = FSDirectory.open(Paths.get(indexPath));
-    // dir = new RAMDirectory();
-
     private IndexWriter prepareIndexWriter(Directory dir) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);

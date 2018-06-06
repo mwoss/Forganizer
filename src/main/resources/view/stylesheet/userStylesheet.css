@@ -7,11 +7,7 @@
 }
 
 .table-data {
- -fx-font-size: 15;
-}
-
-.table-col-titles {
-
+ -fx-font-size: 13;
 }
 
 .search-field {
@@ -21,3 +17,8 @@
 .window-title {
     -fx-font-size: 25;
 }
+
+.info-font-size{
+    -fx-font-size: 14;
+}
+
