@@ -11,6 +11,11 @@ import pl.edu.agh.ki.io.forganizer.utils.Const;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class FileManager {
@@ -54,6 +59,12 @@ public class FileManager {
     public ObservableList<File> getFilesWithNonEmptyTag(Directory dir) throws IOException, ParseException {
         return Arrays.stream(searcher.searchField(Const.tagFileProperty, "/.+/", dir, Searcher.MAX_DOC))
                 .map(converter::convertDocToFile)
+                .filter(distinctByFileProperty(File::getTag))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    private <T> Predicate<T> distinctByFileProperty(Function<? super T, ?> keyExtractor) {
+        Set<Object> unique = ConcurrentHashMap.newKeySet();
+        return t -> unique.add(keyExtractor.apply(t));
     }
 }
