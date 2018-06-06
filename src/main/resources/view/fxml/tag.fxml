@@ -34,7 +34,7 @@
                   <JFXTreeTableColumn fx:id="tagColumn" prefWidth="193.0" styleClass="table-column, table-data" text="Tags" />
               </columns>
           </JFXTreeTableView>
-          <JFXTextField alignment="CENTER" layoutY="94" prefHeight="30.0" prefWidth="195.0" promptText="Search Tags" styleClass="search-field" AnchorPane.leftAnchor="30.0">
+          <JFXTextField fx:id="searchField" alignment="CENTER" layoutY="94" prefHeight="30.0" prefWidth="195.0" promptText="Search Tags" styleClass="search-field" AnchorPane.leftAnchor="30.0">
               <font>
                   <Font />
               </font>

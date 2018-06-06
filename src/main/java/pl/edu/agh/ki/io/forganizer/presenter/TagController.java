@@ -1,9 +1,11 @@
 package pl.edu.agh.ki.io.forganizer.presenter;
 
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +29,6 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 
 
-
 public class TagController implements Initializable {
     private static final Logger log = Logger.getLogger(TagController.class);
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
@@ -36,19 +37,16 @@ public class TagController implements Initializable {
 
     @FXML
     private JFXTreeTableView<File> tagFileTable;
-
     @FXML
     private JFXTreeTableColumn<File, String> tagFileNameColumn;
-
     @FXML
     private JFXTreeTableColumn<File, String> tagFilePathColumn;
-
     @FXML
     private JFXTreeTableView<File> tagTable;
-
     @FXML
-    JFXTreeTableColumn<File, String> tagColumn;
-
+    private JFXTreeTableColumn<File, String> tagColumn;
+    @FXML
+    private JFXTextField searchField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,6 +71,7 @@ public class TagController implements Initializable {
         }
         tagTable.setShowRoot(false);
         addSelectedItemListener();
+        searchField.textProperty().addListener(setupSearchField(tagTable));
     }
 
     private void addSelectedItemListener() {
@@ -109,6 +108,14 @@ public class TagController implements Initializable {
                 return column.getComputedValue(param);
             }
         });
+    }
+
+    private ChangeListener<String> setupSearchField(JFXTreeTableView<File> tableView) {
+        return (o, oldVal, newVal) ->
+                tableView.setPredicate(fileProp -> {
+                    final File file = fileProp.getValue();
+                    return file.getTag().contains(newVal);
+                });
     }
 
 

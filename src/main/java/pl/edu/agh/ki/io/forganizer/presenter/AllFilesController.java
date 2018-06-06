@@ -29,12 +29,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-//TODO: should be optimized somehow
-//TODO: !! init it only once
+//TODO: This class need major refactor :/
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
@@ -42,7 +40,8 @@ public class AllFilesController implements Initializable {
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
 
-    private TextInputDialog inputDialog;
+    private TextInputDialog commentDialog;
+    private TextInputDialog tagDialog;
     private Alert confirmationDialog;
     private TextArea textArea;
 
@@ -66,30 +65,31 @@ public class AllFilesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.fileChooser = new FileLoader();
-        this.inputDialog = new TextInputDialog("");
+        this.commentDialog = new TextInputDialog("");
+        this.tagDialog = new TextInputDialog("");
         this.confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         this.textArea = new TextArea();
+        this.textArea.setWrapText(true);
+        commentDialog.getDialogPane().setContent(textArea);
         setupTableView();
-        setupInputDialog();
+        setupInputDialog(commentDialog, "Input comment in box below", "Comment section");
+        setupInputDialog(tagDialog, "Input tag in box below", "Tag section");
         setupConfirmationDialog();
         log.info("AllFile Controller initialized");
     }
 
-    private void setupInputDialog() {
-        inputDialog.setHeaderText("Input data in box below");
+    private void setupInputDialog(TextInputDialog inputDialog, String headerText, String titleText) {
+        inputDialog.setHeaderText(headerText);
         inputDialog.setGraphic(null);
         inputDialog.setResizable(true);
         inputDialog.getDialogPane().getStylesheets().add(
                 getClass().getResource("/view/stylesheet/dialogStylesheet.css").toExternalForm()
         );
-        this.textArea.setWrapText(true);
-        inputDialog.getDialogPane().setContent(textArea);
     }
 
-    private void setupConfirmationDialog(){
+    private void setupConfirmationDialog() {
         confirmationDialog.setHeaderText("Are you sure want to delete this file?");
     }
-
 
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
@@ -180,9 +180,8 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddCommentContextItem() {
         MenuItem addCommentItem = new MenuItem("Add comment");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            textArea.clear();
-            inputDialog.setTitle("Comment section");
-            inputDialog.showAndWait();
+            textArea.clear(); // oh is total workaround, but i don't know any better approach for this
+            commentDialog.showAndWait();
             String result = textArea.getText();
             File file = allFileTableView.getSelectionModel()
                     .selectedItemProperty()
@@ -201,20 +200,18 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddTagContextItem() {
         MenuItem addTagItem = new MenuItem("Add tag");
         addTagItem.setOnAction((ActionEvent event) -> {
-            textArea.clear(); // oh is total workaround, but i don't know any better approach for this
-            inputDialog.setTitle("Tag section");
-            inputDialog.showAndWait();
-            String result = textArea.getText();
-            File file = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue();
-            try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                fileManager.updateFile(file.withTag(result), dir);
-            } catch (IOException e) {
-                log.error(e);
-            }
-            tagLabel.setText(result);
+            tagDialog.showAndWait().ifPresent(result -> {
+                File file = allFileTableView.getSelectionModel()
+                        .selectedItemProperty()
+                        .get()
+                        .getValue();
+                try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                    fileManager.updateFile(file.withTag(result), dir);
+                } catch (IOException e) {
+                    log.error(e);
+                }
+                tagLabel.setText(result);
+            });
         });
         return addTagItem;
     }
@@ -222,19 +219,20 @@ public class AllFilesController implements Initializable {
     private MenuItem removeContextItem() {
         MenuItem removeItem = new MenuItem("Remove");
         removeItem.setOnAction((ActionEvent event) -> {
-            Optional<ButtonType> result = confirmationDialog.showAndWait();
-            if (result.get() == ButtonType.OK){
-                File file = allFileTableView.getSelectionModel()
-                        .selectedItemProperty()
-                        .get()
-                        .getValue();
-                try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                    fileManager.removeFile(file, dir);
-                    filesList.removeAll(file);
-                } catch (IOException e) {
-                    log.error(e);
+            confirmationDialog.showAndWait().ifPresent(result -> {
+                if (result == ButtonType.OK) {
+                    File file = allFileTableView.getSelectionModel()
+                            .selectedItemProperty()
+                            .get()
+                            .getValue();
+                    try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                        fileManager.removeFile(file, dir);
+                        filesList.removeAll(file);
+                    } catch (IOException e) {
+                        log.error(e);
+                    }
                 }
-            }
+            });
         });
         return removeItem;
     }
