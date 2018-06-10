@@ -7,7 +7,7 @@
 }
 
 .table-data {
- -fx-font-size: 13;
+    -fx-font-size: 13;
 }
 
 .search-field {
@@ -18,7 +18,7 @@
     -fx-font-size: 25;
 }
 
-.info-font-size{
+.info-font-size {
     -fx-font-size: 14;
 }
 
