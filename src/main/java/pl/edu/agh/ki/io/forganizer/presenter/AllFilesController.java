@@ -96,7 +96,7 @@ public class AllFilesController implements Initializable {
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             filesList = fileManager.getAllFiles(dir);
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
             filesList = FXCollections.observableArrayList();
             log.error(e.getMessage());
         } finally {
