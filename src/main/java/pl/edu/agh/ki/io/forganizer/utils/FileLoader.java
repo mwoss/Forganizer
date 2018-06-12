@@ -4,7 +4,6 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-//TODO: enable adding few files in the same time
 public class FileLoader {
     private FileChooser fileChooser;
 

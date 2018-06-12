@@ -2,7 +2,6 @@ package pl.edu.agh.ki.io.forganizer.application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pl.edu.agh.ki.io.forganizer.utils.Const;
 import pl.edu.agh.ki.io.forganizer.utils.SettingsManager;
 import pl.edu.agh.ki.io.forganizer.view.MainWindowView;
 

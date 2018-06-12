@@ -1,8 +1,6 @@
 package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
-import pl.edu.agh.ki.io.forganizer.model.FileManager;
-import pl.edu.agh.ki.io.forganizer.search.Language;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 
 import java.io.IOException;

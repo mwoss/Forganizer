@@ -33,7 +33,6 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-//TODO: This class need major refactor :/
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
@@ -83,6 +82,7 @@ public class AllFilesController implements Initializable {
 
     private void setupInputDialog(TextInputDialog inputDialog, String headerText, String titleText) {
         inputDialog.setHeaderText(headerText);
+        inputDialog.setTitle(titleText);
         inputDialog.setGraphic(null);
         inputDialog.setResizable(true);
         inputDialog.getDialogPane().getStylesheets().add(
@@ -190,7 +190,7 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddCommentContextItem() {
         MenuItem addCommentItem = new MenuItem("Add comment");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            textArea.clear(); // oh is total workaround, but i don't know any better approach for this
+            textArea.clear(); // workaround, but i don't know any better approach for this
             commentDialog.showAndWait();
             String result = textArea.getText();
             File file = getSelectedFile();
@@ -234,7 +234,6 @@ public class AllFilesController implements Initializable {
         return removeItem;
     }
 
-    //TODO: When file deleted or just track when file is deleted or sth
     private MenuItem showInExplorerContextItem() {
         MenuItem addCommentItem = new MenuItem("Show in explorer");
         addCommentItem.setOnAction((ActionEvent event) -> {
