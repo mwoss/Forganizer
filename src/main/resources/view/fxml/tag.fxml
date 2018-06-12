@@ -33,6 +33,9 @@
               <columns>
                   <JFXTreeTableColumn fx:id="tagColumn" prefWidth="193.0" styleClass="table-column, table-data" text="Tags" />
               </columns>
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
           </JFXTreeTableView>
           <JFXTextField fx:id="searchField" alignment="CENTER" layoutY="94" prefHeight="30.0" prefWidth="195.0" promptText="Search Tags" styleClass="search-field" AnchorPane.leftAnchor="30.0">
               <font>

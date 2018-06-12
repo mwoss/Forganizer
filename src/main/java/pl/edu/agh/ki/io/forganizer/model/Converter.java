@@ -5,7 +5,6 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
 import pl.edu.agh.ki.io.forganizer.utils.Const;
 
-//TODO: consider parsing values when u add file/pass to converting function than in convert methods
 public class Converter {
 
     public File convertDocToFile(Document doc) {

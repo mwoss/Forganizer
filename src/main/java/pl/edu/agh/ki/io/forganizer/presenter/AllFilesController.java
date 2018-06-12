@@ -2,6 +2,7 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,17 +33,17 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-//TODO: This class need major refactor :/
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
-    private FileLoader fileChooser;
+    private FileLoader fileChooser = new FileLoader();
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
 
     private TextInputDialog commentDialog;
     private TextInputDialog tagDialog;
     private Alert confirmationDialog;
+    private Alert warningDialog;
     private TextArea textArea;
 
     @FXML
@@ -64,22 +65,24 @@ public class AllFilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.fileChooser = new FileLoader();
         this.commentDialog = new TextInputDialog("");
         this.tagDialog = new TextInputDialog("");
         this.confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        this.warningDialog = new Alert(Alert.AlertType.WARNING);
         this.textArea = new TextArea();
         this.textArea.setWrapText(true);
         commentDialog.getDialogPane().setContent(textArea);
         setupTableView();
         setupInputDialog(commentDialog, "Input comment in box below", "Comment section");
         setupInputDialog(tagDialog, "Input tag in box below", "Tag section");
+        setupWarningDialog();
         setupConfirmationDialog();
         log.info("AllFile Controller initialized");
     }
 
     private void setupInputDialog(TextInputDialog inputDialog, String headerText, String titleText) {
         inputDialog.setHeaderText(headerText);
+        inputDialog.setTitle(titleText);
         inputDialog.setGraphic(null);
         inputDialog.setResizable(true);
         inputDialog.getDialogPane().getStylesheets().add(
@@ -91,13 +94,20 @@ public class AllFilesController implements Initializable {
         confirmationDialog.setHeaderText("Are you sure want to delete this file?");
     }
 
+    private void setupWarningDialog(){
+        warningDialog.setTitle("Warning");
+        warningDialog.setHeaderText(null);
+        warningDialog.setContentText("File or folder doesn't exist");
+    }
+
     private void setupTableView() {
         setupCellValueFactory(fileNameColumn, File::getNameProperty);
         setupCellValueFactory(filePathColumn, File::getPathProperty);
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             filesList = fileManager.getAllFiles(dir);
         } catch (IOException | IllegalArgumentException e) {
-            filesList = FXCollections.observableArrayList();
+            filesList = FXCollections.observableArrayList(param ->
+                    new Observable[]{param.getTagProperty()});
             log.error(e.getMessage());
         } finally {
             allFileTableView.setRoot(new RecursiveTreeItem<>(
@@ -180,13 +190,10 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddCommentContextItem() {
         MenuItem addCommentItem = new MenuItem("Add comment");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            textArea.clear(); // oh is total workaround, but i don't know any better approach for this
+            textArea.clear(); // workaround, but i don't know any better approach for this
             commentDialog.showAndWait();
             String result = textArea.getText();
-            File file = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue();
+            File file = getSelectedFile();
             try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
                 fileManager.updateFile(file.withComment(result), dir);
             } catch (IOException e) {
@@ -200,13 +207,12 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddTagContextItem() {
         MenuItem addTagItem = new MenuItem("Add tag");
         addTagItem.setOnAction((ActionEvent event) -> {
+            tagDialog.getEditor().clear();
             tagDialog.showAndWait().ifPresent(result -> {
-                File file = allFileTableView.getSelectionModel()
-                        .selectedItemProperty()
-                        .get()
-                        .getValue();
+                File file = getSelectedFile();
+                file.setTag(result); // Ultra workaround, not efficient but works
                 try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                    fileManager.updateFile(file.withTag(result), dir);
+                    fileManager.updateFile(file, dir);
                 } catch (IOException e) {
                     log.error(e);
                 }
@@ -221,38 +227,50 @@ public class AllFilesController implements Initializable {
         removeItem.setOnAction((ActionEvent event) -> {
             confirmationDialog.showAndWait().ifPresent(result -> {
                 if (result == ButtonType.OK) {
-                    File file = allFileTableView.getSelectionModel()
-                            .selectedItemProperty()
-                            .get()
-                            .getValue();
-                    try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                        fileManager.removeFile(file, dir);
-                        filesList.removeAll(file);
-                    } catch (IOException e) {
-                        log.error(e);
-                    }
+                    removeFileFromApp();
                 }
             });
         });
         return removeItem;
     }
 
-    //TODO: When file deleted or just track when file is deleted or sth
     private MenuItem showInExplorerContextItem() {
         MenuItem addCommentItem = new MenuItem("Show in explorer");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            String path = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue()
-                    .getPath();
+            File file = getSelectedFile();
             try {
-                Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(path)));
+                Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(file.getPath())));
             } catch (IOException | IllegalArgumentException e) {
-                log.error("Couldn't open directory");
+                warningDialog.showAndWait().ifPresent(result -> {
+                    if (result == ButtonType.OK){
+                        removeFileFromApp();
+                    }
+                });
             }
         });
         return addCommentItem;
+    }
+
+    private File getSelectedFile() {
+        return allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue();
+    }
+
+    private void removeFileFromApp(){
+        File file = getSelectedFile();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+            fileManager.removeFile(file, dir);
+            filesList.removeAll(file);
+            log.info(String.format("File %s removed from app", file.getName()));
+        } catch (IOException e) {
+            log.error(e);
+        }
+    }
+
+    public ObservableList<File> getFileList() {
+        return filesList;
     }
 }
 
