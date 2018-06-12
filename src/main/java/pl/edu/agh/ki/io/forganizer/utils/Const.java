@@ -7,10 +7,6 @@ public final class Const {
 
     public static String pathIndex = "index";
 
-    public static void setPathIndex(String pathIndex) {
-        Const.pathIndex = pathIndex;
-    }
-
     public static final String fileNameProperty = "name";
 
     public static final String filePathProperty = "path";
@@ -25,7 +21,11 @@ public final class Const {
 
     public static final String allFilesItemID = "allFiles";
 
-    private Const(){
+    private Const() {
         throw new AssertionError();
+    }
+
+    public static void setPathIndex(String pathIndex) {
+        Const.pathIndex = pathIndex;
     }
 }
