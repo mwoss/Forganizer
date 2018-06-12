@@ -23,7 +23,7 @@
         </AnchorPane>
         <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="103.0" prefHeight="290.0" prefWidth="679.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <Label text="Team squad info" styleClass="window-title">
+                <Label text="Team info" styleClass="window-title">
                     <font>
                         <Font name="Century Gothic"/>
                     </font>
