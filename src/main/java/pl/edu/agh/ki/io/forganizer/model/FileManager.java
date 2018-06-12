@@ -1,5 +1,6 @@
 package pl.edu.agh.ki.io.forganizer.model;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -45,9 +46,12 @@ public class FileManager {
     }
 
     public ObservableList<File> getAllFiles(Directory dir) throws IOException {
-        return Arrays.stream(searcher.getAllDocs(dir))
+        ObservableList<File> filesList = FXCollections.observableArrayList(param ->
+                new Observable[]{param.getTagProperty()});
+        filesList.addAll(Arrays.stream(searcher.getAllDocs(dir))
                 .map(converter::convertDocToFile)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .collect(Collectors.toList()));
+        return filesList;
     }
 
     public ObservableList<File> getFilesByTag(String tag, Directory dir) throws IOException, ParseException {

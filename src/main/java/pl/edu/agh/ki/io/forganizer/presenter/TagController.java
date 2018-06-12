@@ -8,6 +8,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +33,7 @@ import java.util.function.Function;
 public class TagController implements Initializable {
     private static final Logger log = Logger.getLogger(TagController.class);
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
+    private AllFilesController allFilesController;
     private ObservableList<File> tagList;
     private ObservableList<File> filesList;
 
@@ -50,6 +52,22 @@ public class TagController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        allFilesController = MainWindowController.getAllFilesController();
+        allFilesController.getFileList().addListener((ListChangeListener<File>) c -> {
+            while (c.next()) {
+                if (c.wasUpdated()) {
+                    new Thread(() -> {
+                        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+                            Thread.sleep(500);
+                            tagList.clear(); // Ultra workaround, not efficient but works
+                            tagList.addAll(fileManager.getFilesWithNonEmptyTag(dir));
+                        } catch (IOException | ParseException | InterruptedException e) {
+                            log.error(e.getMessage());
+                        }
+                    }).start();
+                }
+            }
+        });
         setupTagTableView();
         log.info("Tag Controller initialized");
     }
@@ -117,6 +135,4 @@ public class TagController implements Initializable {
                     return file.getTag().contains(newVal);
                 });
     }
-
-
 }

@@ -2,8 +2,10 @@ package pl.edu.agh.ki.io.forganizer.presenter;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.util.Callback;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -29,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -97,7 +101,8 @@ public class AllFilesController implements Initializable {
         try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
             filesList = fileManager.getAllFiles(dir);
         } catch (IOException | IllegalArgumentException e) {
-            filesList = FXCollections.observableArrayList();
+            filesList = FXCollections.observableArrayList(param ->
+                    new Observable[]{param.getTagProperty()});
             log.error(e.getMessage());
         } finally {
             allFileTableView.setRoot(new RecursiveTreeItem<>(
@@ -183,10 +188,7 @@ public class AllFilesController implements Initializable {
             textArea.clear(); // oh is total workaround, but i don't know any better approach for this
             commentDialog.showAndWait();
             String result = textArea.getText();
-            File file = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue();
+            File file = getSelectedFile();
             try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
                 fileManager.updateFile(file.withComment(result), dir);
             } catch (IOException e) {
@@ -202,12 +204,10 @@ public class AllFilesController implements Initializable {
         addTagItem.setOnAction((ActionEvent event) -> {
             tagDialog.getEditor().clear();
             tagDialog.showAndWait().ifPresent(result -> {
-                File file = allFileTableView.getSelectionModel()
-                        .selectedItemProperty()
-                        .get()
-                        .getValue();
+                File file = getSelectedFile();
+                file.setTag(result); // Ultra workaround, not efficient but works
                 try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                    fileManager.updateFile(file.withTag(result), dir);
+                    fileManager.updateFile(file, dir);
                 } catch (IOException e) {
                     log.error(e);
                 }
@@ -222,10 +222,7 @@ public class AllFilesController implements Initializable {
         removeItem.setOnAction((ActionEvent event) -> {
             confirmationDialog.showAndWait().ifPresent(result -> {
                 if (result == ButtonType.OK) {
-                    File file = allFileTableView.getSelectionModel()
-                            .selectedItemProperty()
-                            .get()
-                            .getValue();
+                    File file = getSelectedFile();
                     try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
                         fileManager.removeFile(file, dir);
                         filesList.removeAll(file);
@@ -242,11 +239,7 @@ public class AllFilesController implements Initializable {
     private MenuItem showInExplorerContextItem() {
         MenuItem addCommentItem = new MenuItem("Show in explorer");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            String path = allFileTableView.getSelectionModel()
-                    .selectedItemProperty()
-                    .get()
-                    .getValue()
-                    .getPath();
+            String path = getSelectedFile().getPath();
             try {
                 Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(path)));
             } catch (IOException | IllegalArgumentException e) {
@@ -254,6 +247,17 @@ public class AllFilesController implements Initializable {
             }
         });
         return addCommentItem;
+    }
+
+    private File getSelectedFile() {
+        return allFileTableView.getSelectionModel()
+                .selectedItemProperty()
+                .get()
+                .getValue();
+    }
+
+    public ObservableList<File> getFileList() {
+        return filesList;
     }
 }
 

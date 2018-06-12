@@ -24,6 +24,7 @@ public class MainWindowController implements Initializable {
 
     private final Logger log = Logger.getLogger(MainWindowController.class);
     private final Map<String, Node> controllerMap = new HashMap<>();
+    private static AllFilesController allFilesController;
 
     @FXML
     private BorderPane mainView;
@@ -31,8 +32,10 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            Node allFileViewNode = new FXMLLoader(getClass().getResource("/view/fxml/" + Const.allFilesItemID + ".fxml")).load();
+            FXMLLoader allFileViewLoader = new FXMLLoader(getClass().getResource("/view/fxml/" + Const.allFilesItemID + ".fxml"));
+            Node allFileViewNode = allFileViewLoader.load();
             controllerMap.put(Const.allFilesItemID, allFileViewNode);
+            allFilesController = allFileViewLoader.getController();
             mainView.setCenter(allFileViewNode);
         } catch (IOException e) {
             log.error(e.getMessage());
@@ -58,5 +61,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
-
+    public static AllFilesController getAllFilesController(){
+        return allFilesController;
+    }
 }
