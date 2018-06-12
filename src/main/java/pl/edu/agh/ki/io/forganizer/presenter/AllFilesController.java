@@ -5,7 +5,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.util.Callback;
 import org.apache.log4j.Logger;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -32,7 +30,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -40,13 +37,14 @@ import java.util.function.Function;
 public class AllFilesController implements Initializable {
 
     private static final Logger log = Logger.getLogger(AllFilesController.class);
-    private FileLoader fileChooser;
+    private FileLoader fileChooser = new FileLoader();
     private FileManager fileManager = new FileManager(Const.pathIndex, Language.ENGLISH);
     private ObservableList<File> filesList;
 
     private TextInputDialog commentDialog;
     private TextInputDialog tagDialog;
     private Alert confirmationDialog;
+    private Alert warningDialog;
     private TextArea textArea;
 
     @FXML
@@ -68,16 +66,17 @@ public class AllFilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.fileChooser = new FileLoader();
         this.commentDialog = new TextInputDialog("");
         this.tagDialog = new TextInputDialog("");
         this.confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        this.warningDialog = new Alert(Alert.AlertType.WARNING);
         this.textArea = new TextArea();
         this.textArea.setWrapText(true);
         commentDialog.getDialogPane().setContent(textArea);
         setupTableView();
         setupInputDialog(commentDialog, "Input comment in box below", "Comment section");
         setupInputDialog(tagDialog, "Input tag in box below", "Tag section");
+        setupWarningDialog();
         setupConfirmationDialog();
         log.info("AllFile Controller initialized");
     }
@@ -93,6 +92,12 @@ public class AllFilesController implements Initializable {
 
     private void setupConfirmationDialog() {
         confirmationDialog.setHeaderText("Are you sure want to delete this file?");
+    }
+
+    private void setupWarningDialog(){
+        warningDialog.setTitle("Warning");
+        warningDialog.setHeaderText(null);
+        warningDialog.setContentText("File or folder doesn't exist");
     }
 
     private void setupTableView() {
@@ -222,13 +227,7 @@ public class AllFilesController implements Initializable {
         removeItem.setOnAction((ActionEvent event) -> {
             confirmationDialog.showAndWait().ifPresent(result -> {
                 if (result == ButtonType.OK) {
-                    File file = getSelectedFile();
-                    try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
-                        fileManager.removeFile(file, dir);
-                        filesList.removeAll(file);
-                    } catch (IOException e) {
-                        log.error(e);
-                    }
+                    removeFileFromApp();
                 }
             });
         });
@@ -239,11 +238,15 @@ public class AllFilesController implements Initializable {
     private MenuItem showInExplorerContextItem() {
         MenuItem addCommentItem = new MenuItem("Show in explorer");
         addCommentItem.setOnAction((ActionEvent event) -> {
-            String path = getSelectedFile().getPath();
+            File file = getSelectedFile();
             try {
-                Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(path)));
+                Desktop.getDesktop().open(new java.io.File(PathConverter.getPathForExplorer(file.getPath())));
             } catch (IOException | IllegalArgumentException e) {
-                log.error("Couldn't open directory");
+                warningDialog.showAndWait().ifPresent(result -> {
+                    if (result == ButtonType.OK){
+                        removeFileFromApp();
+                    }
+                });
             }
         });
         return addCommentItem;
@@ -254,6 +257,17 @@ public class AllFilesController implements Initializable {
                 .selectedItemProperty()
                 .get()
                 .getValue();
+    }
+
+    private void removeFileFromApp(){
+        File file = getSelectedFile();
+        try (Directory dir = FSDirectory.open(Paths.get(Const.pathIndex))) {
+            fileManager.removeFile(file, dir);
+            filesList.removeAll(file);
+            log.info(String.format("File %s removed from app", file.getName()));
+        } catch (IOException e) {
+            log.error(e);
+        }
     }
 
     public ObservableList<File> getFileList() {
