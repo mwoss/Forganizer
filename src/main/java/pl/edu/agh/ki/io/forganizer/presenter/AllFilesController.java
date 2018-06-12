@@ -208,6 +208,11 @@ public class AllFilesController implements Initializable {
         MenuItem addTagItem = new MenuItem("Add tag");
         addTagItem.setOnAction((ActionEvent event) -> {
             tagDialog.getEditor().clear();
+            tagDialog.getEditor().textProperty().addListener((o, oldVal, newVal) ->{
+                if(tagDialog.getEditor().getText().contains(" ")){
+                    tagDialog.getEditor().setText(tagDialog.getEditor().getText().split(" ")[0]);
+                }
+            });
             tagDialog.showAndWait().ifPresent(result -> {
                 File file = getSelectedFile();
                 file.setTag(result); // Ultra workaround, not efficient but works
