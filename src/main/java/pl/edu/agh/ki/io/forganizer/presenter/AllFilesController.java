@@ -200,6 +200,7 @@ public class AllFilesController implements Initializable {
     private MenuItem newAddTagContextItem() {
         MenuItem addTagItem = new MenuItem("Add tag");
         addTagItem.setOnAction((ActionEvent event) -> {
+            tagDialog.getEditor().clear();
             tagDialog.showAndWait().ifPresent(result -> {
                 File file = allFileTableView.getSelectionModel()
                         .selectedItemProperty()
