@@ -212,6 +212,7 @@ public class AllFilesController implements Initializable {
                 if(tagDialog.getEditor().getText().contains(" ")){
                     tagDialog.getEditor().setText(tagDialog.getEditor().getText().split(" ")[0]);
                 }
+                tagDialog.getEditor().setText(tagDialog.getEditor().getText().toLowerCase());
             });
             tagDialog.showAndWait().ifPresent(result -> {
                 File file = getSelectedFile();
