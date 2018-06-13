@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MainWindowView {
     private final String TITLE = "Forganizer";
     private final String FXML_FILE_NAME = "/view/fxml/mainWindow.fxml";
-    private final String ICON_PATH = "/view/static/logo.png";
+    private final String ICON_PATH = "/view/static/logo2.png";
 
     private Stage primaryStage;
 
